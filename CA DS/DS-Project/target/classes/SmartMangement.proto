@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ds.service2";
+option java_outer_classname = "Service2Impl";
+
+package service2;
+
+// Interface exported by the server.
+service SmartManagement {
+  // Unary
+  rpc smartTableBooking (TableRequest) returns (TableResponse) {}
+  // Client Streaming
+  rpc smartQ (stream qRequest) returns (qResponse) {}
+  // Server Streaming
+  rpc smartView (viewRequest) returns (stream viewResponse) {}
+}
+
+message TableRequest {
+  int32 tableInput = 1;
+}
+
+message TableResponse {
+  string tableOutput = 1;
+}
+
+message qRequest {
+  string qOrder = 1;
+  int32 time = 2;
+}
+
+message qResponse {
+  string qSuccessful = 1;
+}
+
+message viewRequest {
+  string totalOrders = 1;
+}
+
+message viewResponse {
+  string ordersTime = 1;
+}

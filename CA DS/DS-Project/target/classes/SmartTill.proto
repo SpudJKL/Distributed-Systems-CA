@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ds.service3";
+option java_outer_classname = "Service3Impl";
+
+package service3;
+
+// Interface exported by the server.
+service SmartTill {
+  // bi-directional streaming
+  rpc smartTill (stream tillRequest) returns (stream tillResponse) {}
+  // Unary
+  rpc seatManager (seatRequest) returns (seatResponse) {}
+
+}
+
+message tillRequest {
+  string orderInput = 1;
+}
+
+message tillResponse {
+  string totalOrdersOutput = 1;
+}
+
+message seatRequest {
+  string seats = 1;
+}
+message seatResponse {
+  string totalSeats = 2;
+}

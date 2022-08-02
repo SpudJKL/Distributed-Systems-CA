@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ds.service1";
+option java_outer_classname = "Service1Impl";
+
+package service1;
+
+
+// Interface exported by the server.
+service SmartLighting {
+  // bi-directional streaming
+  rpc smartLights (stream lightRequest) returns (stream lightResponse) {}
+  // Unary
+  rpc autoLights (autoLightsRequest) returns (autoLightsResponse) {}
+  // Server Streaming
+  rpc lightMusic (lightMusicRequest) returns (stream lightMusicResponse) {}
+}
+
+message lightRequest {
+  int32 brightnessInput = 1;
+  bool lightOn = 2;
+  int32 colour = 3;
+}
+
+message lightResponse {
+  int32 brightnessOutput = 2;
+  bool lightOff = 1;
+  int32 colour = 3;
+}
+
+message autoLightsRequest {
+  bool autoLightsInput = 1;
+}
+
+message autoLightsResponse {
+  bool autoLightsOutput = 1;
+}
+
+message lightMusicRequest {
+  bool lightMusicInput = 1;
+}
+
+message lightMusicResponse {
+  bool lightMusicOutput = 1;
+}
