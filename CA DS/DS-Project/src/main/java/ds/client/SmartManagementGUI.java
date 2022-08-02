@@ -1,18 +1,16 @@
 package ds.client;
 
-import ds.service1.SmartLightingGrpc;
+
 import ds.service2.SmartManagementGrpc;
-import ds.service3.SmartTillGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SmartLightingGUI  implements ActionListener {
+public class SmartManagementGUI  implements ActionListener {
 
 
     private JTextField entry1, reply1;
@@ -34,7 +32,7 @@ public class SmartLightingGUI  implements ActionListener {
         panel.add(entry1);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-        JButton button = new JButton("Invoke smartLights");
+        JButton button = new JButton("Invoke smartTableBooking");
         button.addActionListener(this);
         panel.add(button);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -62,7 +60,7 @@ public class SmartLightingGUI  implements ActionListener {
         panel.add(entry2);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-        JButton button = new JButton("Invoke autoLights");
+        JButton button = new JButton("Invoke smartQ");
         button.addActionListener(this);
         panel.add(button);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -90,7 +88,7 @@ public class SmartLightingGUI  implements ActionListener {
         panel.add(entry3);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-        JButton button = new JButton("Invoke lightMusic");
+        JButton button = new JButton("Invoke smartView");
         button.addActionListener(this);
         panel.add(button);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -115,7 +113,7 @@ public class SmartLightingGUI  implements ActionListener {
 
     private void build() {
 
-        JFrame frame = new JFrame("Smart Lighting Controller");
+        JFrame frame = new JFrame("Smart Management Controller");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Set the panel to add buttons
@@ -149,62 +147,61 @@ public class SmartLightingGUI  implements ActionListener {
         JButton button = (JButton)e.getSource();
         String label = button.getActionCommand();
 
-        if (label.equals("Invoke smartLights")) {
-            System.out.println("smartLights to be invoked ...");
+        if (label.equals("Invoke smartTableBooking")) {
+            System.out.println("smartTableBooking to be invoked ...");
 
 
             /*
              *
              */
             ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
-            SmartLightingGrpc.SmartLightingBlockingStub blockingStub = SmartLightingGrpc.newBlockingStub(channel);
-
+            SmartManagementGrpc.SmartManagementBlockingStub blockingStub = SmartManagementGrpc.newBlockingStub(channel);
 
             //preparing message to send
-            ds.service1.lightRequest request = ds.service1.lightRequest.newBuilder().setLightOn(Boolean.parseBoolean(entry1.getText())).setBrightnessInput(Integer.parseInt(entry1.getText())).setColour(Integer.parseInt(entry1.getText())).build();
+            ds.service2.TableRequest request = ds.service2.TableRequest.newBuilder().setTableInput(Integer.parseInt(entry1.getText())).build();
 
             //retreving reply from service
-            ds.service1.lightResponse response = blockingStub.(request);
+            ds.service2.TableResponse response = blockingStub.smartTableBooking(request);
 
-            reply1.setText( String.valueOf( response.getLightOff()));
+            reply1.setText( String.valueOf( response.getTableOutput()));
 
-        }else if (label.equals("Invoke autoLights")) {
-            System.out.println("autoLights to be invoked ...");
+        }else if (label.equals("Invoke smartQ")) {
+            System.out.println("smartQ to be invoked ...");
 
 
             /*
              *
              */
             ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50052).usePlaintext().build();
-            SmartLightingGrpc.SmartLightingBlockingStub blockingStub = SmartLightingGrpc.newBlockingStub(channel);
+            SmartManagementGrpc.SmartManagementBlockingStub blockingStub = SmartManagementGrpc.newBlockingStub(channel);
 
             //preparing message to send
 //			ds.service2.qRequest request = ds.service2.qRequest.newBuilder().setText(entry2.getText()).build();
-            ds.service1.autoLightsRequest request = ds.service1.autoLightsRequest.newBuilder().setAutoLightsInput(Boolean.parseBoolean(entry2.getText())).build();
+            ds.service2.qRequest request = ds.service2.qRequest.newBuilder().setQOrder(entry2.getText()).setTime(Integer.parseInt(entry2.getText())).build();
 
 
             //retreving reply from service
-            ds.service1.autoLightsResponse response = blockingStub.autoLights(request);
+            ds.service2.qResponse response = blockingStub.smartQ;
 
-            reply2.setText( String.valueOf( response.getAutoLightsOutput()) );
+            reply2.setText( String.valueOf( response.getQSuccessful()) );
 
-        }else if (label.equals("Invoke lightMusic")) {
-            System.out.println("lightMusic to be invoked ...");
+        }else if (label.equals("Invoke smartView")) {
+            System.out.println("smartView to be invoked ...");
 
 
             /*
              *
              */
             ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50053).usePlaintext().build();
-            SmartLightingGrpc.SmartLightingBlockingStub blockingStub = SmartLightingGrpc.newBlockingStub(channel);
+            SmartManagementGrpc.SmartManagementBlockingStub blockingStub = SmartManagementGrpc.newBlockingStub(channel);
 
             //preparing message to send
-            ds.service1.lightMusicRequest request = ds.service1.lightMusicRequest.newBuilder().setLightMusicInput(Boolean.parseBoolean(entry3.getText())).build();
+            ds.service2.viewRequest request = ds.service2.viewRequest.newBuilder().setTotalOrders(entry3.getText()).build();
 
             //retreving reply from service
-            ds.service1.lightMusicResponse response = blockingStub.lightMusic(request);
+            ds.service2.viewResponse response = blockingStub.smartView(request);
 
-            reply3.setText( String.valueOf( response.getLightMusicOutput()) );
+            reply3.setText( String.valueOf( response.getOrdersTime()));
 
         }else{
 
