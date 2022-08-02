@@ -30,7 +30,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
     @Override
     public StreamObserver<lightRequest> smartLights(StreamObserver<lightResponse> responseObserver) {
         // somehow set user input for light on / off , brightness levels int , colour
-        boolean lightstatus = lightRequest
+        boolean lightstatus =
         return super.smartLights(responseObserver);
     }
 
@@ -39,7 +39,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
         System.out.println("Auto lights on");
         boolean autoLightsStatus = request.getAutoLightsInput();
         autoLightsResponse.Builder response = autoLightsResponse.newBuilder();
-        if(autoLightsStatus == true){
+        if(autoLightsStatus != false){
             // return message
             response.setAutoLightsOutput(true);
         } else {
@@ -50,6 +50,11 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
 
     @Override
     public void lightMusic(lightMusicRequest request, StreamObserver<lightMusicResponse> responseObserver) {
+        boolean lightMusicStatus = request.getLightMusicInput();
+        lightMusicResponse.Builder response = lightMusicResponse.newBuilder();
+        if (lightMusicStatus =true){
+            res
+        }
         super.lightMusic(request, responseObserver);
     }
 }
