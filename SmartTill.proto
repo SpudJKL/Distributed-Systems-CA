@@ -9,7 +9,7 @@ option java_outer_classname = "SmartTillImp1";
 // Interface exported by the server.
 service SmartTill {
   // bi-directional streaming
-  rpc smartTill (stream tillRequest) returns (Stream tillResponse) {}
+  rpc smartTill (stream tillRequest) returns (stream tillResponse) {}
   // Unary 
   rpc seatManager (seatRequest) returns (seatResponse) {}
     
