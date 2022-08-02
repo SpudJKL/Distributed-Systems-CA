@@ -17,15 +17,15 @@ service SmartLighting {
 }
 
 message lightRequest {
-  int brightnessInput = 1; 
-  bool lightOn = 1;
-  int colour = 3; 
+  int32 brightnessInput = 1; 
+  boolean lightOn = 1;
+  int32 colour = 3; 
 }
 
 message lightResponse {
-    int brightnessOutput = 2; 
-    bool lightOff = 1;
-    int colour = 1; 
+    int32 brightnessOutput = 2; 
+    boolean lightOff = 1;
+    int32 colour = 1; 
 }
 
 message autoLightsRequest {
