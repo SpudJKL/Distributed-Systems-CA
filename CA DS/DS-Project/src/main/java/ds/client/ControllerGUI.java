@@ -193,9 +193,9 @@ public class ControllerGUI implements ActionListener{
 
 
 			//retreving reply from service
-			ds.service2.ResponseMessage response = blockingStub.service2Do(request);
+			ds.service2.qResponse response = blockingStub.s(request);
 
-			reply2.setText( String.valueOf( response.getLength()) );
+			reply2.setText( String.valueOf( response.getQSuccessful()) );
 			
 		}else if (label.equals("Invoke Service 3")) {
 			System.out.println("service 3 to be invoked ...");
@@ -205,13 +205,13 @@ public class ControllerGUI implements ActionListener{
 			 * 
 			 */
 			ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50053).usePlaintext().build();
-			Service3Grpc.Service3BlockingStub blockingStub = Service3Grpc.newBlockingStub(channel);
+			SmartTillGrpc.SmartTillBlockingStub blockingStub = SmartTillGrpc.newBlockingStub(channel);
 
 			//preparing message to send
-			ds.service3.RequestMessage request = ds.service3.RequestMessage.newBuilder().setText(entry3.getText()).build();
+			ds.service3.seatRequest request = ds.service3.seatRequest.newBuilder().setSeats(entry3.getText()).build();
 
 			//retreving reply from service
-			ds.service3.ResponseMessage response = blockingStub.service3Do(request);
+			ds.service3.seatResponse response = blockingStub.service3Do(request);
 
 			reply3.setText( String.valueOf( response.getLength()) );
 		
