@@ -1,4 +1,5 @@
 package ds.client;
+import ds.jmDNS.Discovery;
 import ds.service2.SmartManagementGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -105,7 +106,13 @@ public class SmartManagementGUI  implements ActionListener {
     public static void main(String[] args) {
 
         SmartLightingGUI gui = new SmartLightingGUI();
+        Discovery dsService = new Discovery();
 
+        String service_type = "_SmartManagement._tcp.local.";
+        dsService.discoverService(service_type);
+
+        String host = dsService.serviceInfo.getHostAddresses()[1];
+        int port = dsService.serviceInfo.getPort();
         gui.build();
     }
 
@@ -158,7 +165,7 @@ public class SmartManagementGUI  implements ActionListener {
             //preparing message to send
             ds.service2.TableRequest request = ds.service2.TableRequest.newBuilder().setTableInput(Integer.parseInt(entry1.getText())).build();
 
-            //retreving reply from service
+            //retrieving reply from service
             ds.service2.TableResponse response = blockingStub.smartTableBooking(request);
 
             reply1.setText( String.valueOf( response.getTableOutput()));

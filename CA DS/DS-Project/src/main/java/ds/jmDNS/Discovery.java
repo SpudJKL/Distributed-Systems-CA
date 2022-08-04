@@ -1,4 +1,5 @@
 package ds.jmDNS;
+
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
@@ -13,9 +14,9 @@ public class Discovery {
 
     }
 
-    public ServiceInfo serviceInfo = ServiceInfo.create("SmartLighting._tcp.local.",
-            "Web Service", 50051, "penis");
-
+    //    public ServiceInfo serviceInfo = ServiceInfo.create("SmartLighting._tcp.local.",
+//            "Web Service", 50051, "penis");
+    public ServiceInfo serviceInfo;
 
     public void discoverService(String service_type) {
 
@@ -28,7 +29,7 @@ public class Discovery {
 
                 @Override
                 public void serviceResolved(ServiceEvent event) {
-                    System.out.println("SmartLighting service resolved: " + event.getInfo());
+                    System.out.println("service resolved: " + event.getInfo());
 
                     serviceInfo = event.getInfo();
 

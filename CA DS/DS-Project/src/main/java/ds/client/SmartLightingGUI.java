@@ -110,15 +110,13 @@ public class SmartLightingGUI  implements ActionListener {
 
     public static void main(String[] args) {
 
-
         SmartLightingGUI gui = new SmartLightingGUI();
-
         Discovery dsService = new Discovery();
 
         String service_type = "_SmartLighting._tcp.local.";
         dsService.discoverService(service_type);
 
-        String host = dsService.serviceInfo.getHostAddresses()[0];
+        String host = dsService.serviceInfo.getHostAddresses()[1];
         int port = dsService.serviceInfo.getPort();
         gui.build();
     }
@@ -172,9 +170,8 @@ public class SmartLightingGUI  implements ActionListener {
 
             //preparing message to send
             ds.service1.lightRequest request = ds.service1.lightRequest.newBuilder().setLightOn(Boolean.parseBoolean(entry1.getText())).setBrightnessInput(Integer.parseInt(entry1.getText())).setColour(Integer.parseInt(entry1.getText())).build();
-
             //retreving reply from service
-//            ds.service1.lightResponse response = blockingStub(request);
+//            ds.service1.lightResponse response = blockingStub.(request);
 //
 //            reply1.setText( String.valueOf( response.getLightOff()));
 

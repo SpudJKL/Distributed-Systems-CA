@@ -22,13 +22,12 @@ public class Registration {
             // Create a JmDNS instance
             JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost().getHostAddress());
 
-            String service_type = prop.getProperty("service_type") ;//"_http._tcp.local.";
-            String service_name = prop.getProperty("service_name")  ;// "example";
-            // int service_port = 1234;
-            int service_port = Integer.valueOf( prop.getProperty("service_port") );// #.50051;
+            String service_type = prop.getProperty("service_type");//"_http._tcp.local.";
+            String service_name = prop.getProperty("service_name");// "example";
+            int service_port = Integer.parseInt(prop.getProperty("service_port"));// #.50051;
 
 
-            String service_description_properties = prop.getProperty("service_description")  ;//"path=index.html";
+            String service_description_properties = prop.getProperty("service_description");//"path=index.html";
 
             // Register a service
             ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port, service_description_properties);
@@ -50,26 +49,29 @@ public class Registration {
         }
 
     }
-    public Properties getProperties(String name) {
 
-        Properties prop = null;
+    public Properties getProperties(String name) throws IOException, NullPointerException {
 
-        try (InputStream input = Files.newInputStream(Paths.get("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources/SmartLighting.properties"))) {
-            prop = new Properties();
-
-            // load a properties file
-            prop.load(input);
-
-            // get the property value and print it out
-            System.out.println("Service properies ...");
-            System.out.println("\t service_type: " + prop.getProperty("service_type"));
-            System.out.println("\t service_name: " +prop.getProperty("service_name"));
-            System.out.println("\t service_description: " +prop.getProperty("service_description"));
-            System.out.println("\t service_port: " +prop.getProperty("service_port"));
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        Properties prop;
+        InputStream input = null;
+        if (name.equals("Lighting")) {
+            input = Files.newInputStream(Paths.get("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources/SmartLighting.properties"));
+        } else if (name.equals("Management")) {
+            input = Files.newInputStream(Paths.get("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources/SmartManagement.properties"));
+        } else {
+            input = Files.newInputStream(Paths.get("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources/SmartTill.properties"));
         }
+
+        prop = new Properties();
+        // load a properties file
+        prop.load(input);
+
+        // get the property value and print it out
+        System.out.println("Service properies ...");
+        System.out.println("\t service_type: " + prop.getProperty("service_type"));
+        System.out.println("\t service_name: " + prop.getProperty("service_name"));
+        System.out.println("\t service_description: " + prop.getProperty("service_description"));
+        System.out.println("\t service_port: " + prop.getProperty("service_port"));
 
         return prop;
     }

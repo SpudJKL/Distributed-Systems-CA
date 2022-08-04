@@ -1,8 +1,10 @@
 package ds.service3;
 
+import ds.jmDNS.Registration;
 import ds.service3.Service3Impl;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import io.grpc.*;
@@ -17,16 +19,29 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         SmartTillServer smartTillServer = new SmartTillServer();
+        Registration resService = new Registration();
+        Properties prop = resService.getProperties("");
+        resService.registerService(prop);
+        int port = 50053;
+        try {
 
-        int port = 50058;
-        Server server = ServerBuilder.forPort(port)
-                .addService((BindableService) smartTillServer)
-                .build()
-                .start();
+            Server server = ServerBuilder.forPort(port)
+                    .addService(smartTillServer)
+                    .build()
+                    .start();
 
-        logger.info("Server started, listening on " + port);
+            System.out.println("SmartTillServer started, listening on " + port);
 
-        server.awaitTermination();
+            server.awaitTermination();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
     @Override
