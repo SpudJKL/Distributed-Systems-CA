@@ -61,7 +61,6 @@ public class Registration {
         } else {
             input = Files.newInputStream(Paths.get("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources/SmartTill.properties"));
         }
-
         prop = new Properties();
         // load a properties file
         prop.load(input);

@@ -84,11 +84,13 @@ public class SmartTillGUI  implements ActionListener {
         SmartTillGUI smart = new SmartTillGUI();
         Discovery dsService = new Discovery();
 
-        String service_type = "_SmartManagement._tcp.local.";
+        String service_type = "_SmartTill._tcp.local.";
         dsService.discoverService(service_type);
 
-        String host = dsService.serviceInfo.getHostAddresses()[1];
-        int port = dsService.serviceInfo.getPort();
+//        String host = dsService.serviceInfo.getHostAddresses()[1];
+//        int port = dsService.serviceInfo.getPort();
+        String host = "localhost";
+        int port = 50053;
         smart.build();
     }
 
@@ -166,8 +168,6 @@ public class SmartTillGUI  implements ActionListener {
 
             reply2.setText( String.valueOf( response.getTotalSeats()) );
 
-
-        }else{
 
         }
 

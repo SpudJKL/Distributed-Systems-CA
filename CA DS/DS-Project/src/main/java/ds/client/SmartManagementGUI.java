@@ -105,14 +105,16 @@ public class SmartManagementGUI  implements ActionListener {
 
     public static void main(String[] args) {
 
-        SmartLightingGUI gui = new SmartLightingGUI();
+        SmartManagementGUI gui = new SmartManagementGUI();
         Discovery dsService = new Discovery();
 
         String service_type = "_SmartManagement._tcp.local.";
         dsService.discoverService(service_type);
 
-        String host = dsService.serviceInfo.getHostAddresses()[1];
-        int port = dsService.serviceInfo.getPort();
+//        String host = dsService.serviceInfo.getHostAddresses()[1];
+//        int port = dsService.serviceInfo.getPort();
+        String host = "localhost";
+        int port = 50052;
         gui.build();
     }
 

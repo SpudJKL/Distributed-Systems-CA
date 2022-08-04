@@ -1,7 +1,5 @@
 package ds.service1;
 
-import ds.client.SmartLightingGUI;
-import ds.jmDNS.Discovery;
 import ds.jmDNS.Registration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -31,10 +29,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
 
             server.awaitTermination();
 
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -43,23 +38,44 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
 
     @Override
     public StreamObserver<lightRequest> smartLights(StreamObserver<lightResponse> responseObserver) {
-        // somehow set user input for light on / off , brightness levels int , colour
-        boolean lightstatus;
-        System.out.println("pee pee poo");
-        return super.smartLights(responseObserver);
+        return new StreamObserver<lightRequest>() {
+            @Override
+            public void onNext(lightRequest value) {
+                // parse data from info
+                boolean light = value.getLightOn();
+                int brightness = value.getBrightnessInput();
+                int colour = value.getColour();
+
+                lightResponse response = lightResponse.newBuilder().setLightOff(light).setColour(colour).setBrightnessOutput(brightness).build();
+
+                responseObserver.onNext(response);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                responseObserver.onCompleted();
+            }
+        };
     }
+
 
     @Override
     public void autoLights(autoLightsRequest request, StreamObserver<autoLightsResponse> responseObserver) {
-        System.out.println("Auto lights:");
+        System.out.println("-Auto lights-");
         boolean autoLightsStatus = request.getAutoLightsInput();
-        System.out.println(autoLightsStatus);
+
         autoLightsResponse.Builder response = autoLightsResponse.newBuilder();
         if (autoLightsStatus) {
-            // return message
             response.setAutoLightsOutput(true);
+            System.out.println("autoLights on");
         } else {
             response.setAutoLightsOutput(false);
+            System.out.println("autoLights off");
         }
         response.build();
         responseObserver.onNext(response.build());
@@ -68,15 +84,20 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
 
     @Override
     public void lightMusic(lightMusicRequest request, StreamObserver<lightMusicResponse> responseObserver) {
-        System.out.println("lightMusic:");
+        System.out.println("-lightMusic-");
         boolean lightMusicStatus = request.getLightMusicInput();
-        System.out.println(lightMusicStatus);
+
         lightMusicResponse.Builder response = lightMusicResponse.newBuilder();
         if (lightMusicStatus) {
             response.setLightMusicOutput(true);
+            System.out.println("lightMusic on");
         } else {
             response.setLightMusicOutput(false);
+            System.out.println("lightMusic off");
         }
-        return;
+        response.build();
+        responseObserver.onNext(response.build());
+        responseObserver.onCompleted();
     }
 }
+
