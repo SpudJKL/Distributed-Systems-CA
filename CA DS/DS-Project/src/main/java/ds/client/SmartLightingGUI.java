@@ -3,6 +3,7 @@ package ds.client;
 import ds.jmDNS.Discovery;
 import ds.jmDNS.Registration;
 import ds.service1.SmartLightingGrpc;
+import ds.service1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import javax.swing.*;
@@ -116,8 +117,6 @@ public class SmartLightingGUI  implements ActionListener {
         String service_type = "_SmartLighting._tcp.local.";
         dsService.discoverService(service_type);
 
-//        String host = dsService.serviceInfo.getHostAddresses()[1];
-//        int port = dsService.serviceInfo.getPort();
         String host = "localhost";
         int port = 50051;
         gui.build();
@@ -167,11 +166,12 @@ public class SmartLightingGUI  implements ActionListener {
 
 
             //preparing message to send
-            ds.service1.lightRequest request = ds.service1.lightRequest.newBuilder().setLightOn(Boolean.parseBoolean(entry1.getText())).setBrightnessInput(Integer.parseInt(entry1.getText())).setColour(Integer.parseInt(entry1.getText())).build();
+            lightRequest request = ds.service1.lightRequest.newBuilder().setLightOn(Boolean.parseBoolean(entry1.getText())).setBrightnessInput(Integer.parseInt(entry1.getText())).setColour(Integer.parseInt(entry1.getText())).build();
 //            //retrieving reply from service
 //            ds.service1.lightResponse response = blockingStub.smartLights(request);
-//
+////
 //            reply1.setText(response.g
+
         }else if (label.equals("Invoke autoLights")) {
             System.out.println("autoLights to be invoked ...");
 
@@ -183,13 +183,14 @@ public class SmartLightingGUI  implements ActionListener {
             SmartLightingGrpc.SmartLightingBlockingStub blockingStub = SmartLightingGrpc.newBlockingStub(channel);
 
             //preparing message to send
-            ds.service1.autoLightsRequest request = ds.service1.autoLightsRequest.newBuilder().setAutoLightsInput(Boolean.parseBoolean(entry2.getText())).build();
+            autoLightsRequest request = ds.service1.autoLightsRequest.newBuilder().setAutoLightsInput(Boolean.parseBoolean(entry2.getText())).build();
 
 
             //retreving reply from service
-            ds.service1.autoLightsResponse response = blockingStub.autoLights(request);
+            autoLightsResponse response = blockingStub.autoLights(request);
 
-            reply2.setText( String.valueOf( response.getAutoLightsOutput()) );
+            reply2.setText( String.valueOf(response.getAutoLightsOutput()) );
+            channel.shutdown();
 
         }else if (label.equals("Invoke lightMusic")) {
             System.out.println("lightMusic to be invoked ...");
@@ -202,11 +203,12 @@ public class SmartLightingGUI  implements ActionListener {
             SmartLightingGrpc.SmartLightingBlockingStub blockingStub = SmartLightingGrpc.newBlockingStub(channel);
 
             //preparing message to send
-            ds.service1.lightMusicRequest request = ds.service1.lightMusicRequest.newBuilder().setLightMusicInput(Boolean.parseBoolean(entry3.getText())).build();
+            lightMusicRequest request = ds.service1.lightMusicRequest.newBuilder().setLightMusicInput(Boolean.parseBoolean(entry3.getText())).build();
 
 //            //retreving reply from service
-//            ds.service1.lightMusicResponse response = blockingStub.lightMusic(request);
-//
+            lightMusicResponse response = blockingStub.lightMusic(request);
+
+
 //            reply3.setText( String.valueOf( response.getLightMusicOutput()) );
 
 

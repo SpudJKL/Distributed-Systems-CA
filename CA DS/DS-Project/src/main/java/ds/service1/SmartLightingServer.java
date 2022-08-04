@@ -3,6 +3,7 @@ package ds.service1;
 import ds.jmDNS.Registration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;

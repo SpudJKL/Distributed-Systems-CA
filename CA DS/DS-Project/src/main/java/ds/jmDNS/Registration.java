@@ -55,11 +55,11 @@ public class Registration {
         Properties prop;
         InputStream input = null;
         if (name.equals("Lighting")) {
-            input = Files.newInputStream(Paths.get("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources/SmartLighting.properties"));
+            input = Files.newInputStream(Paths.get("DS-Project/src/main/resources/SmartLighting.properties"));
         } else if (name.equals("Management")) {
-            input = Files.newInputStream(Paths.get("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources/SmartManagement.properties"));
+            input = Files.newInputStream(Paths.get("DS-Project/src/main/resources/SmartManagement.properties"));
         } else {
-            input = Files.newInputStream(Paths.get("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources/SmartTill.properties"));
+            input = Files.newInputStream(Paths.get("DS-Project/src/main/resources/SmartTill.properties"));
         }
         prop = new Properties();
         // load a properties file
