@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class Registration {
@@ -18,7 +20,7 @@ public class Registration {
 
         try {
             // Create a JmDNS instance
-            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost().getHostAddress());
 
             String service_type = prop.getProperty("service_type") ;//"_http._tcp.local.";
             String service_name = prop.getProperty("service_name")  ;// "example";
@@ -52,7 +54,7 @@ public class Registration {
 
         Properties prop = null;
 
-        try (InputStream input = new FileInputStream("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources" + name +".properties")) {
+        try (InputStream input = Files.newInputStream(Paths.get("C:/Users/magui/Desktop/Learning stuff/DS-CA-/CA DS/DS-Project/src/main/resources/SmartLighting.properties"))) {
             prop = new Properties();
 
             // load a properties file

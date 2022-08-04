@@ -13,7 +13,8 @@ public class Discovery {
 
     }
 
-    public ServiceInfo serviceInfo;
+    public ServiceInfo serviceInfo = ServiceInfo.create("SmartLighting._tcp.local.",
+            "Web Service", 50051, "penis");
 
 
     public void discoverService(String service_type) {

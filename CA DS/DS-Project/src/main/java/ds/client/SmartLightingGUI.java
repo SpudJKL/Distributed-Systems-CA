@@ -112,7 +112,7 @@ public class SmartLightingGUI  implements ActionListener {
 
 
         SmartLightingGUI gui = new SmartLightingGUI();
-       ;
+
         Discovery dsService = new Discovery();
 
         String service_type = "_SmartLighting._tcp.local.";
