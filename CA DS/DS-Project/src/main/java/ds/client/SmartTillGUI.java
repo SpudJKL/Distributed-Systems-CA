@@ -134,9 +134,9 @@ public class SmartTillGUI  implements ActionListener {
             ds.service3.tillRequest request = ds.service3.tillRequest.newBuilder().setOrderInput(entry1.getText()).build();
 
             //retreving reply from service
-            ds.service3.tillResponse response = blockingStub.sn
-
-            reply1.setText( String.valueOf( response.getTotalOrdersOutput()));
+//            ds.service3.tillResponse response = blockingStub.
+//
+//            reply1.setText( String.valueOf( response.getTotalOrdersOutput()));
 
         }else if (label.equals("Invoke seatManager")) {
             System.out.println("seatManager to be invoked ...");

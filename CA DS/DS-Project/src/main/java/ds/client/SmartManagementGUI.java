@@ -1,6 +1,4 @@
 package ds.client;
-
-
 import ds.service2.SmartManagementGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -181,9 +179,9 @@ public class SmartManagementGUI  implements ActionListener {
 
 
             //retreving reply from service
-            ds.service2.qResponse response = blockingStub.smartQ;
-
-            reply2.setText( String.valueOf( response.getQSuccessful()) );
+//            ds.service2.qResponse response = blockingStub
+//
+//            reply2.setText( String.valueOf( response.getQSuccessful()) );
 
         }else if (label.equals("Invoke smartView")) {
             System.out.println("smartView to be invoked ...");
@@ -199,9 +197,9 @@ public class SmartManagementGUI  implements ActionListener {
             ds.service2.viewRequest request = ds.service2.viewRequest.newBuilder().setTotalOrders(entry3.getText()).build();
 
             //retreving reply from service
-            ds.service2.viewResponse response = blockingStub.smartView(request);
-
-            reply3.setText( String.valueOf( response.getOrdersTime()));
+//            ds.service2.viewResponse response = blockingStub.smartView(request);
+//
+//            reply3.setText( String.valueOf( response.getOrdersTime()));
 
         }else{
 
