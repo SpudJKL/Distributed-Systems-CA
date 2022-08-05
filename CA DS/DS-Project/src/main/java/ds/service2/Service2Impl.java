@@ -53,19 +53,20 @@ public final class Service2Impl {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\024SmartMangement.proto\022\010service2\"\"\n\014Tabl" +
-      "eRequest\022\022\n\ntableInput\030\001 \001(\005\"$\n\rTableRes" +
-      "ponse\022\023\n\013tableOutput\030\001 \001(\t\"(\n\010qRequest\022\016" +
-      "\n\006qOrder\030\001 \001(\t\022\014\n\004time\030\002 \001(\005\" \n\tqRespons" +
-      "e\022\023\n\013qSuccessful\030\001 \001(\t\"\"\n\013viewRequest\022\023\n" +
-      "\013totalOrders\030\001 \001(\t\"\"\n\014viewResponse\022\022\n\nor" +
-      "dersTime\030\001 \001(\t2\320\001\n\017SmartManagement\022F\n\021sm" +
-      "artTableBooking\022\026.service2.TableRequest\032" +
-      "\027.service2.TableResponse\"\000\0225\n\006smartQ\022\022.s" +
-      "ervice2.qRequest\032\023.service2.qResponse\"\000(" +
-      "\001\022>\n\tsmartView\022\025.service2.viewRequest\032\026." +
-      "service2.viewResponse\"\0000\001B\035\n\013ds.service2" +
-      "B\014Service2ImplP\001b\006proto3"
+      "\n\024SmartMangement.proto\022\010service2\"5\n\014Tabl" +
+      "eRequest\022\022\n\ntableInput\030\001 \001(\005\022\021\n\ttimeInpu" +
+      "t\030\002 \001(\001\"8\n\rTableResponse\022\023\n\013tableOutput\030" +
+      "\001 \001(\t\022\022\n\ntimeOutput\030\002 \001(\001\"(\n\010qRequest\022\016\n" +
+      "\006qOrder\030\001 \001(\t\022\014\n\004time\030\002 \001(\005\" \n\tqResponse" +
+      "\022\023\n\013qSuccessful\030\001 \001(\t\"&\n\013viewRequest\022\027\n\017" +
+      "bookingsRequest\030\001 \001(\t\"%\n\014viewResponse\022\025\n" +
+      "\rbookingsTotal\030\001 \001(\t2\320\001\n\017SmartManagement" +
+      "\022F\n\021smartTableBooking\022\026.service2.TableRe" +
+      "quest\032\027.service2.TableResponse\"\000\0225\n\006smar" +
+      "tQ\022\022.service2.qRequest\032\023.service2.qRespo" +
+      "nse\"\000(\001\022>\n\tsmartView\022\025.service2.viewRequ" +
+      "est\032\026.service2.viewResponse\"\0000\001B\035\n\013ds.se" +
+      "rvice2B\014Service2ImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -84,13 +85,13 @@ public final class Service2Impl {
     internal_static_service2_TableRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service2_TableRequest_descriptor,
-        new java.lang.String[] { "TableInput", });
+        new java.lang.String[] { "TableInput", "TimeInput", });
     internal_static_service2_TableResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_service2_TableResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service2_TableResponse_descriptor,
-        new java.lang.String[] { "TableOutput", });
+        new java.lang.String[] { "TableOutput", "TimeOutput", });
     internal_static_service2_qRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_service2_qRequest_fieldAccessorTable = new
@@ -108,13 +109,13 @@ public final class Service2Impl {
     internal_static_service2_viewRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service2_viewRequest_descriptor,
-        new java.lang.String[] { "TotalOrders", });
+        new java.lang.String[] { "BookingsRequest", });
     internal_static_service2_viewResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_service2_viewResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service2_viewResponse_descriptor,
-        new java.lang.String[] { "OrdersTime", });
+        new java.lang.String[] { "BookingsTotal", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

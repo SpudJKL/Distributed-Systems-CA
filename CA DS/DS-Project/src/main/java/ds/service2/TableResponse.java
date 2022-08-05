@@ -17,6 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private TableResponse() {
     tableOutput_ = "";
+    timeOutput_ = 0D;
   }
 
   @java.lang.Override
@@ -47,6 +48,11 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             tableOutput_ = s;
+            break;
+          }
+          case 17: {
+
+            timeOutput_ = input.readDouble();
             break;
           }
           default: {
@@ -115,6 +121,15 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int TIMEOUTPUT_FIELD_NUMBER = 2;
+  private double timeOutput_;
+  /**
+   * <code>double timeOutput = 2;</code>
+   */
+  public double getTimeOutput() {
+    return timeOutput_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -132,6 +147,9 @@ private static final long serialVersionUID = 0L;
     if (!getTableOutputBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, tableOutput_);
     }
+    if (timeOutput_ != 0D) {
+      output.writeDouble(2, timeOutput_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -143,6 +161,10 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (!getTableOutputBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, tableOutput_);
+    }
+    if (timeOutput_ != 0D) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeDoubleSize(2, timeOutput_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -162,6 +184,10 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && getTableOutput()
         .equals(other.getTableOutput());
+    result = result && (
+        java.lang.Double.doubleToLongBits(getTimeOutput())
+        == java.lang.Double.doubleToLongBits(
+            other.getTimeOutput()));
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -175,6 +201,9 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + TABLEOUTPUT_FIELD_NUMBER;
     hash = (53 * hash) + getTableOutput().hashCode();
+    hash = (37 * hash) + TIMEOUTPUT_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getTimeOutput()));
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -310,6 +339,8 @@ private static final long serialVersionUID = 0L;
       super.clear();
       tableOutput_ = "";
 
+      timeOutput_ = 0D;
+
       return this;
     }
 
@@ -337,6 +368,7 @@ private static final long serialVersionUID = 0L;
     public ds.service2.TableResponse buildPartial() {
       ds.service2.TableResponse result = new ds.service2.TableResponse(this);
       result.tableOutput_ = tableOutput_;
+      result.timeOutput_ = timeOutput_;
       onBuilt();
       return result;
     }
@@ -388,6 +420,9 @@ private static final long serialVersionUID = 0L;
       if (!other.getTableOutput().isEmpty()) {
         tableOutput_ = other.tableOutput_;
         onChanged();
+      }
+      if (other.getTimeOutput() != 0D) {
+        setTimeOutput(other.getTimeOutput());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -483,6 +518,32 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       tableOutput_ = value;
+      onChanged();
+      return this;
+    }
+
+    private double timeOutput_ ;
+    /**
+     * <code>double timeOutput = 2;</code>
+     */
+    public double getTimeOutput() {
+      return timeOutput_;
+    }
+    /**
+     * <code>double timeOutput = 2;</code>
+     */
+    public Builder setTimeOutput(double value) {
+      
+      timeOutput_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>double timeOutput = 2;</code>
+     */
+    public Builder clearTimeOutput() {
+      
+      timeOutput_ = 0D;
       onChanged();
       return this;
     }

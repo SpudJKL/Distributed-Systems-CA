@@ -11,4 +11,14 @@ public interface autoLightsResponseOrBuilder extends
    * <code>bool autoLightsOutput = 1;</code>
    */
   boolean getAutoLightsOutput();
+
+  /**
+   * <code>string dimLevels = 2;</code>
+   */
+  java.lang.String getDimLevels();
+  /**
+   * <code>string dimLevels = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getDimLevelsBytes();
 }

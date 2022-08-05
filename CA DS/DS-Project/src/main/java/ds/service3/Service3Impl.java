@@ -43,15 +43,16 @@ public final class Service3Impl {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017SmartTill.proto\022\010service3\"!\n\013tillReque" +
-      "st\022\022\n\norderInput\030\001 \001(\t\")\n\014tillResponse\022\031" +
-      "\n\021totalOrdersOutput\030\001 \001(\t\"\034\n\013seatRequest" +
-      "\022\r\n\005seats\030\001 \001(\t\"\"\n\014seatResponse\022\022\n\ntotal" +
-      "Seats\030\002 \001(\t2\215\001\n\tSmartTill\022@\n\tsmartTill\022\025" +
-      ".service3.tillRequest\032\026.service3.tillRes" +
-      "ponse\"\000(\0010\001\022>\n\013seatManager\022\025.service3.se" +
-      "atRequest\032\026.service3.seatResponse\"\000B\035\n\013d" +
-      "s.service3B\014Service3ImplP\001b\006proto3"
+      "\n\017SmartTill.proto\022\010service3\"C\n\013tillReque" +
+      "st\022\022\n\norderInput\030\001 \001(\t\022\017\n\007seatCol\030\002 \001(\005\022" +
+      "\017\n\007seatRow\030\003 \001(\005\")\n\014tillResponse\022\031\n\021tota" +
+      "lOrdersOutput\030\001 \001(\t\" \n\013seatRequest\022\021\n\tvi" +
+      "ewSeats\030\001 \001(\t\"\"\n\014seatResponse\022\022\n\ntotalSe" +
+      "ats\030\001 \001(\t2\215\001\n\tSmartTill\022@\n\tsmartTill\022\025.s" +
+      "ervice3.tillRequest\032\026.service3.tillRespo" +
+      "nse\"\000(\0010\001\022>\n\013seatManager\022\025.service3.seat" +
+      "Request\032\026.service3.seatResponse\"\000B\035\n\013ds." +
+      "service3B\014Service3ImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -70,7 +71,7 @@ public final class Service3Impl {
     internal_static_service3_tillRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service3_tillRequest_descriptor,
-        new java.lang.String[] { "OrderInput", });
+        new java.lang.String[] { "OrderInput", "SeatCol", "SeatRow", });
     internal_static_service3_tillResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_service3_tillResponse_fieldAccessorTable = new
@@ -82,7 +83,7 @@ public final class Service3Impl {
     internal_static_service3_seatRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service3_seatRequest_descriptor,
-        new java.lang.String[] { "Seats", });
+        new java.lang.String[] { "ViewSeats", });
     internal_static_service3_seatResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_service3_seatResponse_fieldAccessorTable = new

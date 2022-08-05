@@ -160,7 +160,7 @@ public class SmartTillGUI  implements ActionListener {
 
             //preparing message to send
 //			ds.service2.qRequest request = ds.service2.qRequest.newBuilder().setText(entry2.getText()).build();
-            ds.service3.seatRequest request = ds.service3.seatRequest.newBuilder().setSeats(entry2.getText()).build();
+            ds.service3.seatRequest request = ds.service3.seatRequest.newBuilder().setViewSeats(entry2.getText()).build();
 
 
             //retreving reply from service

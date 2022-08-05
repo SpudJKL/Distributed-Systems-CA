@@ -8,12 +8,12 @@ public interface viewRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string totalOrders = 1;</code>
+   * <code>string bookingsRequest = 1;</code>
    */
-  java.lang.String getTotalOrders();
+  java.lang.String getBookingsRequest();
   /**
-   * <code>string totalOrders = 1;</code>
+   * <code>string bookingsRequest = 1;</code>
    */
   com.google.protobuf.ByteString
-      getTotalOrdersBytes();
+      getBookingsRequestBytes();
 }

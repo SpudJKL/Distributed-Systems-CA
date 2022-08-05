@@ -17,6 +17,8 @@ service SmartTill {
 
 message tillRequest {
   string orderInput = 1;
+  int32 seatCol = 2;
+  int32 seatRow = 3;
 }
 
 message tillResponse {
@@ -24,8 +26,8 @@ message tillResponse {
 }
 
 message seatRequest {
-  string seats = 1;
+  string viewSeats = 1;
 }
 message seatResponse {
-  string totalSeats = 2;
+  string totalSeats = 1;
 }

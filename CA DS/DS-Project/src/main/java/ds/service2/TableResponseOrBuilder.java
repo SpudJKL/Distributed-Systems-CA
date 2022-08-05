@@ -16,4 +16,9 @@ public interface TableResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getTableOutputBytes();
+
+  /**
+   * <code>double timeOutput = 2;</code>
+   */
+  double getTimeOutput();
 }

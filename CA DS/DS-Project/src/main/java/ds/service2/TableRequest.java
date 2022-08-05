@@ -17,6 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private TableRequest() {
     tableInput_ = 0;
+    timeInput_ = 0D;
   }
 
   @java.lang.Override
@@ -46,6 +47,11 @@ private static final long serialVersionUID = 0L;
           case 8: {
 
             tableInput_ = input.readInt32();
+            break;
+          }
+          case 17: {
+
+            timeInput_ = input.readDouble();
             break;
           }
           default: {
@@ -89,6 +95,15 @@ private static final long serialVersionUID = 0L;
     return tableInput_;
   }
 
+  public static final int TIMEINPUT_FIELD_NUMBER = 2;
+  private double timeInput_;
+  /**
+   * <code>double timeInput = 2;</code>
+   */
+  public double getTimeInput() {
+    return timeInput_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -106,6 +121,9 @@ private static final long serialVersionUID = 0L;
     if (tableInput_ != 0) {
       output.writeInt32(1, tableInput_);
     }
+    if (timeInput_ != 0D) {
+      output.writeDouble(2, timeInput_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -118,6 +136,10 @@ private static final long serialVersionUID = 0L;
     if (tableInput_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(1, tableInput_);
+    }
+    if (timeInput_ != 0D) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeDoubleSize(2, timeInput_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -137,6 +159,10 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && (getTableInput()
         == other.getTableInput());
+    result = result && (
+        java.lang.Double.doubleToLongBits(getTimeInput())
+        == java.lang.Double.doubleToLongBits(
+            other.getTimeInput()));
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -150,6 +176,9 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + TABLEINPUT_FIELD_NUMBER;
     hash = (53 * hash) + getTableInput();
+    hash = (37 * hash) + TIMEINPUT_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        java.lang.Double.doubleToLongBits(getTimeInput()));
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -285,6 +314,8 @@ private static final long serialVersionUID = 0L;
       super.clear();
       tableInput_ = 0;
 
+      timeInput_ = 0D;
+
       return this;
     }
 
@@ -312,6 +343,7 @@ private static final long serialVersionUID = 0L;
     public ds.service2.TableRequest buildPartial() {
       ds.service2.TableRequest result = new ds.service2.TableRequest(this);
       result.tableInput_ = tableInput_;
+      result.timeInput_ = timeInput_;
       onBuilt();
       return result;
     }
@@ -362,6 +394,9 @@ private static final long serialVersionUID = 0L;
       if (other == ds.service2.TableRequest.getDefaultInstance()) return this;
       if (other.getTableInput() != 0) {
         setTableInput(other.getTableInput());
+      }
+      if (other.getTimeInput() != 0D) {
+        setTimeInput(other.getTimeInput());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -414,6 +449,32 @@ private static final long serialVersionUID = 0L;
     public Builder clearTableInput() {
       
       tableInput_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private double timeInput_ ;
+    /**
+     * <code>double timeInput = 2;</code>
+     */
+    public double getTimeInput() {
+      return timeInput_;
+    }
+    /**
+     * <code>double timeInput = 2;</code>
+     */
+    public Builder setTimeInput(double value) {
+      
+      timeInput_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>double timeInput = 2;</code>
+     */
+    public Builder clearTimeInput() {
+      
+      timeInput_ = 0D;
       onChanged();
       return this;
     }

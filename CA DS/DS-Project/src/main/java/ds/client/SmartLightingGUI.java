@@ -206,7 +206,7 @@ public class SmartLightingGUI  implements ActionListener {
             lightMusicRequest request = ds.service1.lightMusicRequest.newBuilder().setLightMusicInput(Boolean.parseBoolean(entry3.getText())).build();
 
 //            //retreving reply from service
-            lightMusicResponse response = blockingStub.lightMusic(request);
+//            lightMusicResponse response = blockingStub.(request);
 
 
 //            reply3.setText( String.valueOf( response.getLightMusicOutput()) );

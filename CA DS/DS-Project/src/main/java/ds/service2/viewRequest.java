@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private viewRequest() {
-    totalOrders_ = "";
+    bookingsRequest_ = "";
   }
 
   @java.lang.Override
@@ -46,7 +46,7 @@ private static final long serialVersionUID = 0L;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            totalOrders_ = s;
+            bookingsRequest_ = s;
             break;
           }
           default: {
@@ -81,34 +81,34 @@ private static final long serialVersionUID = 0L;
             ds.service2.viewRequest.class, ds.service2.viewRequest.Builder.class);
   }
 
-  public static final int TOTALORDERS_FIELD_NUMBER = 1;
-  private volatile java.lang.Object totalOrders_;
+  public static final int BOOKINGSREQUEST_FIELD_NUMBER = 1;
+  private volatile java.lang.Object bookingsRequest_;
   /**
-   * <code>string totalOrders = 1;</code>
+   * <code>string bookingsRequest = 1;</code>
    */
-  public java.lang.String getTotalOrders() {
-    java.lang.Object ref = totalOrders_;
+  public java.lang.String getBookingsRequest() {
+    java.lang.Object ref = bookingsRequest_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      totalOrders_ = s;
+      bookingsRequest_ = s;
       return s;
     }
   }
   /**
-   * <code>string totalOrders = 1;</code>
+   * <code>string bookingsRequest = 1;</code>
    */
   public com.google.protobuf.ByteString
-      getTotalOrdersBytes() {
-    java.lang.Object ref = totalOrders_;
+      getBookingsRequestBytes() {
+    java.lang.Object ref = bookingsRequest_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      totalOrders_ = b;
+      bookingsRequest_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -129,8 +129,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getTotalOrdersBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, totalOrders_);
+    if (!getBookingsRequestBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, bookingsRequest_);
     }
     unknownFields.writeTo(output);
   }
@@ -141,8 +141,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getTotalOrdersBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, totalOrders_);
+    if (!getBookingsRequestBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, bookingsRequest_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -160,8 +160,8 @@ private static final long serialVersionUID = 0L;
     ds.service2.viewRequest other = (ds.service2.viewRequest) obj;
 
     boolean result = true;
-    result = result && getTotalOrders()
-        .equals(other.getTotalOrders());
+    result = result && getBookingsRequest()
+        .equals(other.getBookingsRequest());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -173,8 +173,8 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + TOTALORDERS_FIELD_NUMBER;
-    hash = (53 * hash) + getTotalOrders().hashCode();
+    hash = (37 * hash) + BOOKINGSREQUEST_FIELD_NUMBER;
+    hash = (53 * hash) + getBookingsRequest().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -308,7 +308,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      totalOrders_ = "";
+      bookingsRequest_ = "";
 
       return this;
     }
@@ -336,7 +336,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public ds.service2.viewRequest buildPartial() {
       ds.service2.viewRequest result = new ds.service2.viewRequest(this);
-      result.totalOrders_ = totalOrders_;
+      result.bookingsRequest_ = bookingsRequest_;
       onBuilt();
       return result;
     }
@@ -385,8 +385,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(ds.service2.viewRequest other) {
       if (other == ds.service2.viewRequest.getDefaultInstance()) return this;
-      if (!other.getTotalOrders().isEmpty()) {
-        totalOrders_ = other.totalOrders_;
+      if (!other.getBookingsRequest().isEmpty()) {
+        bookingsRequest_ = other.bookingsRequest_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -418,71 +418,71 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object totalOrders_ = "";
+    private java.lang.Object bookingsRequest_ = "";
     /**
-     * <code>string totalOrders = 1;</code>
+     * <code>string bookingsRequest = 1;</code>
      */
-    public java.lang.String getTotalOrders() {
-      java.lang.Object ref = totalOrders_;
+    public java.lang.String getBookingsRequest() {
+      java.lang.Object ref = bookingsRequest_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        totalOrders_ = s;
+        bookingsRequest_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string totalOrders = 1;</code>
+     * <code>string bookingsRequest = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getTotalOrdersBytes() {
-      java.lang.Object ref = totalOrders_;
+        getBookingsRequestBytes() {
+      java.lang.Object ref = bookingsRequest_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        totalOrders_ = b;
+        bookingsRequest_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string totalOrders = 1;</code>
+     * <code>string bookingsRequest = 1;</code>
      */
-    public Builder setTotalOrders(
+    public Builder setBookingsRequest(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      totalOrders_ = value;
+      bookingsRequest_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string totalOrders = 1;</code>
+     * <code>string bookingsRequest = 1;</code>
      */
-    public Builder clearTotalOrders() {
+    public Builder clearBookingsRequest() {
       
-      totalOrders_ = getDefaultInstance().getTotalOrders();
+      bookingsRequest_ = getDefaultInstance().getBookingsRequest();
       onChanged();
       return this;
     }
     /**
-     * <code>string totalOrders = 1;</code>
+     * <code>string bookingsRequest = 1;</code>
      */
-    public Builder setTotalOrdersBytes(
+    public Builder setBookingsRequestBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      totalOrders_ = value;
+      bookingsRequest_ = value;
       onChanged();
       return this;
     }

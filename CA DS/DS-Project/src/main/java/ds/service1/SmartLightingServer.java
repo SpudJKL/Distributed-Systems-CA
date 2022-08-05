@@ -1,9 +1,11 @@
 package ds.service1;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import ds.jmDNS.Registration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.StatusRuntimeException;
+import java.math.*;
 import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
@@ -69,11 +71,15 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
     public void autoLights(autoLightsRequest request, StreamObserver<autoLightsResponse> responseObserver) {
         System.out.println("-Auto lights-");
         boolean autoLightsStatus = request.getAutoLightsInput();
-
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+        int Random = (int)(Math.random()*100);
+        LocalDateTime now = LocalDateTime.now();
         autoLightsResponse.Builder response = autoLightsResponse.newBuilder();
         if (autoLightsStatus) {
             response.setAutoLightsOutput(true);
             System.out.println("autoLights on");
+            response.setDimLevels("The time is: " + dtf.format(now) + "." + " The lights has been automatically-dim'd to "+ Random +"% brightness");
+
         } else {
             response.setAutoLightsOutput(false);
             System.out.println("autoLights off");
@@ -87,7 +93,6 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
     public void lightMusic(lightMusicRequest request, StreamObserver<lightMusicResponse> responseObserver) {
         System.out.println("-lightMusic-");
         boolean lightMusicStatus = request.getLightMusicInput();
-
         lightMusicResponse.Builder response = lightMusicResponse.newBuilder();
         if (lightMusicStatus) {
             response.setLightMusicOutput(true);

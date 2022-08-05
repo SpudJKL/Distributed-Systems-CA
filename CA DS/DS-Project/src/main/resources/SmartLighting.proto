@@ -35,6 +35,7 @@ message autoLightsRequest {
 
 message autoLightsResponse {
   bool autoLightsOutput = 1;
+  string dimLevels = 2;
 }
 
 message lightMusicRequest {

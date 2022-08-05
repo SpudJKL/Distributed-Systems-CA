@@ -16,4 +16,14 @@ public interface tillRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getOrderInputBytes();
+
+  /**
+   * <code>int32 seatCol = 2;</code>
+   */
+  int getSeatCol();
+
+  /**
+   * <code>int32 seatRow = 3;</code>
+   */
+  int getSeatRow();
 }

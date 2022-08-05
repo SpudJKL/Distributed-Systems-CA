@@ -17,6 +17,8 @@ private static final long serialVersionUID = 0L;
   }
   private tillRequest() {
     orderInput_ = "";
+    seatCol_ = 0;
+    seatRow_ = 0;
   }
 
   @java.lang.Override
@@ -47,6 +49,16 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             orderInput_ = s;
+            break;
+          }
+          case 16: {
+
+            seatCol_ = input.readInt32();
+            break;
+          }
+          case 24: {
+
+            seatRow_ = input.readInt32();
             break;
           }
           default: {
@@ -115,6 +127,24 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int SEATCOL_FIELD_NUMBER = 2;
+  private int seatCol_;
+  /**
+   * <code>int32 seatCol = 2;</code>
+   */
+  public int getSeatCol() {
+    return seatCol_;
+  }
+
+  public static final int SEATROW_FIELD_NUMBER = 3;
+  private int seatRow_;
+  /**
+   * <code>int32 seatRow = 3;</code>
+   */
+  public int getSeatRow() {
+    return seatRow_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -132,6 +162,12 @@ private static final long serialVersionUID = 0L;
     if (!getOrderInputBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, orderInput_);
     }
+    if (seatCol_ != 0) {
+      output.writeInt32(2, seatCol_);
+    }
+    if (seatRow_ != 0) {
+      output.writeInt32(3, seatRow_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -143,6 +179,14 @@ private static final long serialVersionUID = 0L;
     size = 0;
     if (!getOrderInputBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, orderInput_);
+    }
+    if (seatCol_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(2, seatCol_);
+    }
+    if (seatRow_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(3, seatRow_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -162,6 +206,10 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && getOrderInput()
         .equals(other.getOrderInput());
+    result = result && (getSeatCol()
+        == other.getSeatCol());
+    result = result && (getSeatRow()
+        == other.getSeatRow());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -175,6 +223,10 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + ORDERINPUT_FIELD_NUMBER;
     hash = (53 * hash) + getOrderInput().hashCode();
+    hash = (37 * hash) + SEATCOL_FIELD_NUMBER;
+    hash = (53 * hash) + getSeatCol();
+    hash = (37 * hash) + SEATROW_FIELD_NUMBER;
+    hash = (53 * hash) + getSeatRow();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -310,6 +362,10 @@ private static final long serialVersionUID = 0L;
       super.clear();
       orderInput_ = "";
 
+      seatCol_ = 0;
+
+      seatRow_ = 0;
+
       return this;
     }
 
@@ -337,6 +393,8 @@ private static final long serialVersionUID = 0L;
     public ds.service3.tillRequest buildPartial() {
       ds.service3.tillRequest result = new ds.service3.tillRequest(this);
       result.orderInput_ = orderInput_;
+      result.seatCol_ = seatCol_;
+      result.seatRow_ = seatRow_;
       onBuilt();
       return result;
     }
@@ -388,6 +446,12 @@ private static final long serialVersionUID = 0L;
       if (!other.getOrderInput().isEmpty()) {
         orderInput_ = other.orderInput_;
         onChanged();
+      }
+      if (other.getSeatCol() != 0) {
+        setSeatCol(other.getSeatCol());
+      }
+      if (other.getSeatRow() != 0) {
+        setSeatRow(other.getSeatRow());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -483,6 +547,58 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       orderInput_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int seatCol_ ;
+    /**
+     * <code>int32 seatCol = 2;</code>
+     */
+    public int getSeatCol() {
+      return seatCol_;
+    }
+    /**
+     * <code>int32 seatCol = 2;</code>
+     */
+    public Builder setSeatCol(int value) {
+      
+      seatCol_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 seatCol = 2;</code>
+     */
+    public Builder clearSeatCol() {
+      
+      seatCol_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int seatRow_ ;
+    /**
+     * <code>int32 seatRow = 3;</code>
+     */
+    public int getSeatRow() {
+      return seatRow_;
+    }
+    /**
+     * <code>int32 seatRow = 3;</code>
+     */
+    public Builder setSeatRow(int value) {
+      
+      seatRow_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 seatRow = 3;</code>
+     */
+    public Builder clearSeatRow() {
+      
+      seatRow_ = 0;
       onChanged();
       return this;
     }

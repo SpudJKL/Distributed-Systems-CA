@@ -18,10 +18,12 @@ service SmartManagement {
 
 message TableRequest {
   int32 tableInput = 1;
+  double timeInput = 2;
 }
 
 message TableResponse {
   string tableOutput = 1;
+  double timeOutput = 2;
 }
 
 message qRequest {
@@ -34,9 +36,9 @@ message qResponse {
 }
 
 message viewRequest {
-  string totalOrders = 1;
+  string bookingsRequest = 1;
 }
 
 message viewResponse {
-  string ordersTime = 1;
+  string bookingsTotal = 1;
 }

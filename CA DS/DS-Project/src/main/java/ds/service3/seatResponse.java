@@ -43,7 +43,7 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 18: {
+          case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
             totalSeats_ = s;
@@ -81,10 +81,10 @@ private static final long serialVersionUID = 0L;
             ds.service3.seatResponse.class, ds.service3.seatResponse.Builder.class);
   }
 
-  public static final int TOTALSEATS_FIELD_NUMBER = 2;
+  public static final int TOTALSEATS_FIELD_NUMBER = 1;
   private volatile java.lang.Object totalSeats_;
   /**
-   * <code>string totalSeats = 2;</code>
+   * <code>string totalSeats = 1;</code>
    */
   public java.lang.String getTotalSeats() {
     java.lang.Object ref = totalSeats_;
@@ -99,7 +99,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string totalSeats = 2;</code>
+   * <code>string totalSeats = 1;</code>
    */
   public com.google.protobuf.ByteString
       getTotalSeatsBytes() {
@@ -130,7 +130,7 @@ private static final long serialVersionUID = 0L;
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (!getTotalSeatsBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, totalSeats_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, totalSeats_);
     }
     unknownFields.writeTo(output);
   }
@@ -142,7 +142,7 @@ private static final long serialVersionUID = 0L;
 
     size = 0;
     if (!getTotalSeatsBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, totalSeats_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, totalSeats_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -420,7 +420,7 @@ private static final long serialVersionUID = 0L;
 
     private java.lang.Object totalSeats_ = "";
     /**
-     * <code>string totalSeats = 2;</code>
+     * <code>string totalSeats = 1;</code>
      */
     public java.lang.String getTotalSeats() {
       java.lang.Object ref = totalSeats_;
@@ -435,7 +435,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string totalSeats = 2;</code>
+     * <code>string totalSeats = 1;</code>
      */
     public com.google.protobuf.ByteString
         getTotalSeatsBytes() {
@@ -451,7 +451,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string totalSeats = 2;</code>
+     * <code>string totalSeats = 1;</code>
      */
     public Builder setTotalSeats(
         java.lang.String value) {
@@ -464,7 +464,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string totalSeats = 2;</code>
+     * <code>string totalSeats = 1;</code>
      */
     public Builder clearTotalSeats() {
       
@@ -473,7 +473,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string totalSeats = 2;</code>
+     * <code>string totalSeats = 1;</code>
      */
     public Builder setTotalSeatsBytes(
         com.google.protobuf.ByteString value) {

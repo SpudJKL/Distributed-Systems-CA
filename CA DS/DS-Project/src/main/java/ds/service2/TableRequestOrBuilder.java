@@ -11,4 +11,9 @@ public interface TableRequestOrBuilder extends
    * <code>int32 tableInput = 1;</code>
    */
   int getTableInput();
+
+  /**
+   * <code>double timeInput = 2;</code>
+   */
+  double getTimeInput();
 }

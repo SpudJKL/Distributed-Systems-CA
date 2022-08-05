@@ -203,7 +203,7 @@ public class SmartManagementGUI  implements ActionListener {
             SmartManagementGrpc.SmartManagementBlockingStub blockingStub = SmartManagementGrpc.newBlockingStub(channel);
 
             //preparing message to send
-            ds.service2.viewRequest request = ds.service2.viewRequest.newBuilder().setTotalOrders(entry3.getText()).build();
+            ds.service2.viewRequest request = ds.service2.viewRequest.newBuilder().setBookingsRequest(entry3.getText()).build();
 
             //retreving reply from service
 //            ds.service2.viewResponse response = blockingStub.smartView(request);

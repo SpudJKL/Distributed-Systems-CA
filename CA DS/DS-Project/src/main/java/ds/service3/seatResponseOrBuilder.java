@@ -8,11 +8,11 @@ public interface seatResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string totalSeats = 2;</code>
+   * <code>string totalSeats = 1;</code>
    */
   java.lang.String getTotalSeats();
   /**
-   * <code>string totalSeats = 2;</code>
+   * <code>string totalSeats = 1;</code>
    */
   com.google.protobuf.ByteString
       getTotalSeatsBytes();

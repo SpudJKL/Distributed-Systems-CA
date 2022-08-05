@@ -58,18 +58,18 @@ public final class Service1Impl {
       "tOn\030\002 \001(\010\022\016\n\006colour\030\003 \001(\005\"K\n\rlightRespon" +
       "se\022\030\n\020brightnessOutput\030\002 \001(\005\022\020\n\010lightOff" +
       "\030\001 \001(\010\022\016\n\006colour\030\003 \001(\005\",\n\021autoLightsRequ" +
-      "est\022\027\n\017autoLightsInput\030\001 \001(\010\".\n\022autoLigh" +
-      "tsResponse\022\030\n\020autoLightsOutput\030\001 \001(\010\",\n\021" +
-      "lightMusicRequest\022\027\n\017lightMusicInput\030\001 \001" +
-      "(\010\".\n\022lightMusicResponse\022\030\n\020lightMusicOu" +
-      "tput\030\001 \001(\0102\355\001\n\rSmartLighting\022D\n\013smartLig" +
-      "hts\022\026.service1.lightRequest\032\027.service1.l" +
-      "ightResponse\"\000(\0010\001\022I\n\nautoLights\022\033.servi" +
-      "ce1.autoLightsRequest\032\034.service1.autoLig" +
-      "htsResponse\"\000\022K\n\nlightMusic\022\033.service1.l" +
-      "ightMusicRequest\032\034.service1.lightMusicRe" +
-      "sponse\"\0000\001B\035\n\013ds.service1B\014Service1ImplP" +
-      "\001b\006proto3"
+      "est\022\027\n\017autoLightsInput\030\001 \001(\010\"A\n\022autoLigh" +
+      "tsResponse\022\030\n\020autoLightsOutput\030\001 \001(\010\022\021\n\t" +
+      "dimLevels\030\002 \001(\t\",\n\021lightMusicRequest\022\027\n\017" +
+      "lightMusicInput\030\001 \001(\010\".\n\022lightMusicRespo" +
+      "nse\022\030\n\020lightMusicOutput\030\001 \001(\0102\355\001\n\rSmartL" +
+      "ighting\022D\n\013smartLights\022\026.service1.lightR" +
+      "equest\032\027.service1.lightResponse\"\000(\0010\001\022I\n" +
+      "\nautoLights\022\033.service1.autoLightsRequest" +
+      "\032\034.service1.autoLightsResponse\"\000\022K\n\nligh" +
+      "tMusic\022\033.service1.lightMusicRequest\032\034.se" +
+      "rvice1.lightMusicResponse\"\0000\001B\035\n\013ds.serv" +
+      "ice1B\014Service1ImplP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -106,7 +106,7 @@ public final class Service1Impl {
     internal_static_service1_autoLightsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service1_autoLightsResponse_descriptor,
-        new java.lang.String[] { "AutoLightsOutput", });
+        new java.lang.String[] { "AutoLightsOutput", "DimLevels", });
     internal_static_service1_lightMusicRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_service1_lightMusicRequest_fieldAccessorTable = new
