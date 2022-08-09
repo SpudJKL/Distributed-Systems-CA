@@ -39,6 +39,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
 
     }
 
+    // bi-directional streaming
     @Override
     public StreamObserver<lightRequest> smartLights(StreamObserver<lightResponse> responseObserver) {
         return new StreamObserver<lightRequest>() {
@@ -66,7 +67,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
         };
     }
 
-
+    // Unary
     @Override
     public void autoLights(autoLightsRequest request, StreamObserver<autoLightsResponse> responseObserver) {
         System.out.println("-Auto lights-");
@@ -89,6 +90,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
         responseObserver.onCompleted();
     }
 
+    // Server Streaming
     @Override
     public void lightMusic(lightMusicRequest request, StreamObserver<lightMusicResponse> responseObserver) {
         System.out.println("-lightMusic-");

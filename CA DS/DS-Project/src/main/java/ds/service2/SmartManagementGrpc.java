@@ -162,7 +162,7 @@ public final class SmartManagementGrpc {
      * </pre>
      */
     public void smartTableBooking(ds.service2.TableRequest request,
-        io.grpc.stub.StreamObserver<ds.service2.TableResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<ds.service2.TableResponse> responseObserver) throws BookingError {
       asyncUnimplementedUnaryCall(getSmartTableBookingMethod(), responseObserver);
     }
 
