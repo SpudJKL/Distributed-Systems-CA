@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 
 import ds.service1.lightRequest;
 import ds.service1.lightResponse;
+import ds.service2.Order;
+import ds.service2.qResponse;
 import io.grpc.*;
 import io.grpc.stub.StreamObserver;
 
@@ -50,23 +52,21 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
         return new StreamObserver<tillRequest>() {
             @Override
             public void onNext(tillRequest value) {
-                // parse data from info
+                // store information from client
+                ArrayList<String> orders = new ArrayList<>();
                 String orderInfo = value.getOrderInput();
+                orders.add(orderInfo);
                 int col = value.getSeatCol();
                 int row = value.getSeatRow();
-                char[][] seats = Seats();
+                char[][] seats = {};
                 // pass these variables to the method to set the table as taken
-                addseat(row, col, seats);
-
+                Seats.addseat(row, col);
                 tillResponse.Builder response = tillResponse.newBuilder().setTotalOrdersOutput(orderInfo);
-                response.setTotalOrdersOutput(orderInfo + orderInfo);
-
-//                responseObserver.onNext(response);
+                response.setTotalOrdersOutput(orders.toString());
             }
 
             @Override
             public void onError(Throwable t) {
-
             }
 
             @Override
@@ -80,56 +80,12 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
     public void seatManager(seatRequest request, StreamObserver<seatResponse> responseObserver) {
         System.out.println("-seatManager-");
         String seatStatus = request.getViewSeats();
-        char[][] seats = Seats();
         seatResponse.Builder response = seatResponse.newBuilder();
-        response.setTotalSeats(printSeats(seats));
+        response.setTotalSeats("For output look at the console");
+        Seats.showSeats();
         response.build();
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
-    }
-
-    public static char[][] Seats() {
-        // create seats
-        int rows = 7;
-        int cols = 7;
-        int totalSeats = cols * rows;
-        char[][] seats = new char[cols][rows];
-        for (char[] row : seats) {
-            Arrays.fill(row, 'S');
-        }
-        return seats;
-    }
-
-    public static String printSeats(char[][] seats) {
-        System.out.println("Seats View");
-        for (int i = 0; i <= seats[0].length; i++) {
-            for (int j = 0; j <= seats.length; j++) {
-                if (i == 0) {
-                    if (j == 0) {
-                        System.out.print(" ");
-                    } else {
-                        System.out.print(" " + j);
-                    }
-                } else {
-                    if (j == 0) {
-                        System.out.print(i);
-                    } else {
-                        System.out.print(" " + seats[j - 1][i - 1]);
-                    }
-                }
-            }
-            System.out.print("\n");
-        }
-        return null;
-    }
-
-    public void addseat(int row,int col, char[][] seat){
-        System.out.println("Enter a row number:");
-        int Row=row;
-        System.out.println("Enter a seat number in that row:");
-        int Col=col;
-        seat[Col - 1][Row - 1] = 'X';
-
     }
 }
 

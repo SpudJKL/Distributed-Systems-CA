@@ -5,4 +5,4 @@ public class BookingError extends Exception {
         super(errorMessage);
     }
 }
-}
+

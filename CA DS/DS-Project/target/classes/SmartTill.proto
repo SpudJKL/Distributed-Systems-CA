@@ -29,5 +29,5 @@ message seatRequest {
   string viewSeats = 1;
 }
 message seatResponse {
-  string totalSeats = 1;
+  string seatOutput = 1;
 }

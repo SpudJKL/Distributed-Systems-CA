@@ -366,8 +366,12 @@ public final class SmartManagementGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_SMART_TABLE_BOOKING:
-          serviceImpl.smartTableBooking((ds.service2.TableRequest) request,
-              (io.grpc.stub.StreamObserver<ds.service2.TableResponse>) responseObserver);
+          try {
+            serviceImpl.smartTableBooking((TableRequest) request,
+                (io.grpc.stub.StreamObserver<TableResponse>) responseObserver);
+          } catch (BookingError e) {
+            throw new RuntimeException(e);
+          }
           break;
         case METHODID_SMART_VIEW:
           serviceImpl.smartView((ds.service2.viewRequest) request,
