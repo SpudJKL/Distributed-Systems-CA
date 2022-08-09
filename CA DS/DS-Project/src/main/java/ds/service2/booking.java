@@ -6,7 +6,7 @@ public class booking {
     int table;
     double time;
 
-    ArrayList<booking> arr = new ArrayList<>(); // arrayList for adding new booking objects
+    static ArrayList<booking> arr = new ArrayList<>(); // arrayList for adding new booking objects
 
 
     public booking(int table, double time) throws BookingError{
@@ -40,7 +40,7 @@ public class booking {
     }
 
 
-    public String showBookings(){
+    public static String showBookings(){
         String bookings = "";
         for (int i = 0; i < arr.size() ; i++) {
             bookings = String.valueOf(arr.get(i));

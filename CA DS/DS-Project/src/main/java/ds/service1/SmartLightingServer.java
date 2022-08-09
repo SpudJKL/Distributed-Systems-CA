@@ -5,11 +5,9 @@ import java.time.LocalDateTime;
 import ds.jmDNS.Registration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import java.math.*;
 import io.grpc.stub.StreamObserver;
-
 import java.io.IOException;
-import java.util.Properties;
+
 
 
 public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase {
@@ -17,9 +15,9 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
 
     public static void main(String[] args) throws InterruptedException, IOException {
         SmartLightingServer service1 = new SmartLightingServer();
-        Registration resService = new Registration();
-        Properties prop = resService.getProperties("Lighting");
-        resService.registerService(prop);
+        Registration reg = new Registration();
+        reg.registerService("_SmartLighting._tcp.local.","SmartLighting", 50051, "service for Smart Lighting operations");
+
         int port = 50051;
         try {
 

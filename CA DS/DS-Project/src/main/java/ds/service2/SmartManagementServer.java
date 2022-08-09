@@ -5,16 +5,14 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Properties;
+
 
 public class SmartManagementServer extends SmartManagementGrpc.SmartManagementImplBase {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         SmartManagementServer service1 = new SmartManagementServer();
-        Registration resService = new Registration();
-        Properties prop = resService.getProperties("Management");
-        resService.registerService(prop);
+        Registration reg = new Registration();
+        reg.registerService("_SmartManagement._tcp.local.","SmartManagement", 50052, "service for Smart Management operations");
         int port = 50052;
         try {
 
@@ -117,7 +115,6 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
     @Override
     public void smartView(viewRequest request, StreamObserver<viewResponse> responseObserver) {
         System.out.println("-smartView-");
-        booking booking = new booking();
         viewResponse.Builder response = viewResponse.newBuilder();
         response.setBookingsTotal(String.valueOf(booking.arr.toString()));
         booking.showBookings();

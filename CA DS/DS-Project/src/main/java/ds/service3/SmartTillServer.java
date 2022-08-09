@@ -1,15 +1,10 @@
 package ds.service3;
 
-import ds.jmDNS.Registration;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
-
-import ds.service1.lightRequest;
-import ds.service1.lightResponse;
-import ds.service2.Order;
-import ds.service2.qResponse;
+import ds.jmDNS.Registration;
 import io.grpc.*;
 import io.grpc.stub.StreamObserver;
 
@@ -17,14 +12,13 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
 
 
     private static final Logger logger = Logger.getLogger(SmartTillServer.class.getName());
+    char[][] seats = Seats.fill();
 
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
         SmartTillServer smartTillServer = new SmartTillServer();
-        Registration resService = new Registration();
-        Properties prop = resService.getProperties("");
-        resService.registerService(prop);
+        Registration reg = new Registration();
+        reg.registerService("_SmartTill._tcp.local.","SmartTill", 50053, "service for Smart Till operations");
         int port = 50053;
         try {
 
@@ -47,22 +41,22 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
 
     }
 
+    // bi-directional streaming
     @Override
     public StreamObserver<tillRequest> smartTill(StreamObserver<tillResponse> responseObserver) {
+        ArrayList<String> orders = new ArrayList<>();
         return new StreamObserver<tillRequest>() {
             @Override
             public void onNext(tillRequest value) {
                 // store information from client
-                ArrayList<String> orders = new ArrayList<>();
+
                 String orderInfo = value.getOrderInput();
                 orders.add(orderInfo);
                 int col = value.getSeatCol();
                 int row = value.getSeatRow();
-                char[][] seats = {};
+
                 // pass these variables to the method to set the table as taken
-                Seats.addseat(row, col);
-                tillResponse.Builder response = tillResponse.newBuilder().setTotalOrdersOutput(orderInfo);
-                response.setTotalOrdersOutput(orders.toString());
+                Seats.addseat(row, col, seats);
             }
 
             @Override
@@ -71,18 +65,25 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
 
             @Override
             public void onCompleted() {
+
+                tillResponse response = tillResponse.newBuilder()
+                        .setTotalOrdersOutput(String.valueOf(orders.toString()))
+                        .build();
+                responseObserver.onNext(response);
                 responseObserver.onCompleted();
             }
         };
     }
 
+    // Unary
     @Override
     public void seatManager(seatRequest request, StreamObserver<seatResponse> responseObserver) {
         System.out.println("-seatManager-");
         String seatStatus = request.getViewSeats();
         seatResponse.Builder response = seatResponse.newBuilder();
-        response.setTotalSeats("For output look at the console");
-        Seats.showSeats();
+        response.setTotalSeats("See console for output");
+
+        Seats.showSeats(seats);
         response.build();
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
