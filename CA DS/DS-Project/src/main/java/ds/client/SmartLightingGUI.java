@@ -162,15 +162,15 @@ public class SmartLightingGUI  implements ActionListener {
             System.out.println("smartLights to be invoked ...");
             // creating a channel for SmartLightingGrpc
             ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
-            SmartLightingGrpc.SmartLightingBlockingStub blockingStub = SmartLightingGrpc.newBlockingStub(channel);
+            SmartLightingGrpc.SmartLightingStub asyncStub = SmartLightingGrpc.newStub(channel);
 
 
             //preparing message to send
             lightRequest request = ds.service1.lightRequest.newBuilder().setLightOn(Boolean.parseBoolean(entry1.getText())).setBrightnessInput(Integer.parseInt(entry1.getText())).setColour(Integer.parseInt(entry1.getText())).build();
-//            //retrieving reply from service
-//            ds.service1.lightResponse response = blockingStub.smartLights(request);
-////
-//            reply1.setText(response.g
+
+            lightResponse responseObserver = asyncStub.smartLights(request, responseObserver);
+//
+            reply1.setText(responseObserver.getBrightnessOutput())
 
         }else if (label.equals("Invoke autoLights")) {
             System.out.println("autoLights to be invoked ...");
@@ -205,10 +205,10 @@ public class SmartLightingGUI  implements ActionListener {
             //preparing message to send
             lightMusicRequest request = ds.service1.lightMusicRequest.newBuilder().setLightMusicInput(Boolean.parseBoolean(entry3.getText())).build();
 
-//            //retreving reply from service
-//            lightMusicResponse response = blockingStub.(request);
-
-
+            //retreving reply from service
+//            lightMusicResponse response = blockingStub.
+//
+//
 //            reply3.setText( String.valueOf( response.getLightMusicOutput()) );
 
 

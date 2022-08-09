@@ -3,15 +3,17 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 import ds.jmDNS.Registration;
+import ds.service3.SmartTillServer;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
-
+import java.util.logging.Logger;
 
 
 public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase {
 
+    private static final Logger logger = Logger.getLogger(SmartLightingServer.class.getName());
 
     public static void main(String[] args) throws InterruptedException, IOException {
         SmartLightingServer service1 = new SmartLightingServer();

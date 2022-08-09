@@ -1,13 +1,17 @@
 package ds.service2;
 
 import ds.jmDNS.Registration;
+import ds.service3.SmartTillServer;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 
 public class SmartManagementServer extends SmartManagementGrpc.SmartManagementImplBase {
+
+    private static final Logger logger = Logger.getLogger(SmartManagementServer.class.getName());
 
     public static void main(String[] args) throws InterruptedException, IOException {
         SmartManagementServer service1 = new SmartManagementServer();
