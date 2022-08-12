@@ -1,24 +1,20 @@
 package ds.service1;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 
 import ds.jmDNS.Registration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
-import java.util.logging.Logger;
-
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase {
 
-    private static final Logger logger = Logger.getLogger(SmartLightingServer.class.getName());
 
     public static void main(String[] args) throws InterruptedException, IOException {
         SmartLightingServer service1 = new SmartLightingServer();
         Registration reg = new Registration();
-        reg.registerService("_SmartLighting_http._tcp.local.","SmartLighting", 50051, "service for Smart Lighting operations");
-
+        reg.registerService("_smartlighting_http._tcp.local.","SmartLighting", 50051, "service for Smart Lighting operations");
         int port = 50051;
         try {
 

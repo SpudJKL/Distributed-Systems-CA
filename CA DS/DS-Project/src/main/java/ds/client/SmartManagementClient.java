@@ -1,25 +1,15 @@
 package ds.client;
 
 
-import java.util.Random;
+
 import java.util.Scanner;
 import ds.jmDNS.Discovery;
-import ds.service1.lightMusicRequest;
-import ds.service1.lightMusicResponse;
 import ds.service2.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
-
 import javax.jmdns.ServiceInfo;
 
-import ds.jmDNS.Discovery;
-import ds.service1.SmartLightingGrpc;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-
-import javax.jmdns.ServiceInfo;
-import java.util.Scanner;
 
 public class SmartManagementClient {
 
@@ -30,11 +20,10 @@ public class SmartManagementClient {
 
         public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
-            SmartManagementClient smartManagementClient = new SmartManagementClient();
 
             // Discover the jmDNS service
             Discovery discovery = new Discovery();
-            String service_type = "_SmartManagement._tcp.local.";
+            String service_type = "_smartmanagement_http._tcp.local.";
             discovery.discoverService(service_type);
 
             ManagedChannel channel = ManagedChannelBuilder

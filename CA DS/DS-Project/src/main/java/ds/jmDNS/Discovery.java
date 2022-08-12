@@ -16,7 +16,7 @@ public class Discovery {
 
         try {
             // Create a JmDNS instance
-            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost().getHostAddress());
 
 
             jmdns.addServiceListener(service_type, new ServiceListener() {
@@ -55,7 +55,7 @@ public class Discovery {
             });
 
             // Wait a bit
-//            Thread.sleep(2000);
+//            Thread.sleep(15000);
 
 //            jmdns.close();
 

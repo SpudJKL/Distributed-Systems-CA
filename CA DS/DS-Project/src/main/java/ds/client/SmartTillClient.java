@@ -18,11 +18,10 @@ public class SmartTillClient {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        SmartTillClient smartTillClient = new SmartTillClient();
 
         // Discover the jmDNS service
         Discovery discovery = new Discovery();
-        String service_type = "_SmartTill._tcp.local.";
+        String service_type = "_smarttill_http._tcp.local.";
         discovery.discoverService(service_type);
 
         ManagedChannel channel = ManagedChannelBuilder

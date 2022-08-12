@@ -19,7 +19,7 @@ public class SmartLightingClient {
 
         // Discover the jmDNS service
         Discovery discovery = new Discovery();
-        String service_type = "_SmartLighting_http._tcp.local.";
+        String service_type = "_smartlighting_http._tcp.local.";
         discovery.discoverService(service_type);
         // Create channel
         ManagedChannel channel = ManagedChannelBuilder
@@ -29,7 +29,6 @@ public class SmartLightingClient {
         // Create stubs
         blockingStub = SmartLightingGrpc.newBlockingStub(channel);
         asyncStub = SmartLightingGrpc.newStub(channel);
-        System.out.println("Here");
         // taking userInput
         System.out.println("SmartLighting");
         System.out.println();

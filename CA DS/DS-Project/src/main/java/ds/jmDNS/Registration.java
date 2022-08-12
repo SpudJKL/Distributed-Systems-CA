@@ -27,7 +27,7 @@ public class Registration {
             Thread.sleep(5000);
 
             // Unregister all services
-            //jmdns.unregisterAllServices();
+//            jmdns.unregisterAllServices();
 
         } catch (IOException e) {
             System.out.println(e.getMessage());

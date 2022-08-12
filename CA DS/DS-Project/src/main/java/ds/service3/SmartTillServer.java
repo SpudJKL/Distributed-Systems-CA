@@ -1,24 +1,21 @@
 package ds.service3;
 
-
-import java.io.IOException;
-import java.util.*;
-import java.util.logging.Logger;
 import ds.jmDNS.Registration;
-import io.grpc.*;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
 
-
-    private static final Logger logger = Logger.getLogger(SmartTillServer.class.getName());
     char[][] seats = Seats.fill();
 
 
     public static void main(String[] args) throws IOException, InterruptedException {
         SmartTillServer smartTillServer = new SmartTillServer();
         Registration reg = new Registration();
-        reg.registerService("_SmartTill._tcp.local.","SmartTill", 50053, "service for Smart Till operations");
+        reg.registerService("_smarttill_http._tcp.local.","SmartTill", 50053, "service for Smart Till operations");
         int port = 50053;
         try {
 
