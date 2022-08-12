@@ -47,8 +47,8 @@ public final class Service3Impl {
       "st\022\022\n\norderInput\030\001 \001(\t\022\017\n\007seatCol\030\002 \001(\005\022" +
       "\017\n\007seatRow\030\003 \001(\005\")\n\014tillResponse\022\031\n\021tota" +
       "lOrdersOutput\030\001 \001(\t\" \n\013seatRequest\022\021\n\tvi" +
-      "ewSeats\030\001 \001(\t\"\"\n\014seatResponse\022\022\n\ntotalSe" +
-      "ats\030\001 \001(\t2\215\001\n\tSmartTill\022@\n\tsmartTill\022\025.s" +
+      "ewSeats\030\001 \001(\t\"\"\n\014seatResponse\022\022\n\nseatOut" +
+      "put\030\001 \001(\t2\215\001\n\tSmartTill\022@\n\tsmartTill\022\025.s" +
       "ervice3.tillRequest\032\026.service3.tillRespo" +
       "nse\"\000(\0010\001\022>\n\013seatManager\022\025.service3.seat" +
       "Request\032\026.service3.seatResponse\"\000B\035\n\013ds." +
@@ -89,7 +89,7 @@ public final class Service3Impl {
     internal_static_service3_seatResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service3_seatResponse_descriptor,
-        new java.lang.String[] { "TotalSeats", });
+        new java.lang.String[] { "SeatOutput", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

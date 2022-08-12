@@ -10,13 +10,7 @@ import java.net.UnknownHostException;
 
 public class Discovery {
 
-    public Discovery() {
-
-    }
-
-    //    public ServiceInfo serviceInfo = ServiceInfo.create("SmartLighting._tcp.local.",
-//            "Web Service", 50051, "penis");
-    public ServiceInfo serviceInfo;
+    private ServiceInfo serviceInfo;
 
     public void discoverService(String service_type) {
 
@@ -61,17 +55,14 @@ public class Discovery {
             });
 
             // Wait a bit
-            Thread.sleep(2000);
+//            Thread.sleep(2000);
 
-            jmdns.close();
+//            jmdns.close();
 
         } catch (UnknownHostException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 }

@@ -3,7 +3,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 import ds.jmDNS.Registration;
-import ds.service3.SmartTillServer;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
@@ -18,7 +17,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
     public static void main(String[] args) throws InterruptedException, IOException {
         SmartLightingServer service1 = new SmartLightingServer();
         Registration reg = new Registration();
-        reg.registerService("_SmartLighting._tcp.local.","SmartLighting", 50051, "service for Smart Lighting operations");
+        reg.registerService("_SmartLighting_http._tcp.local.","SmartLighting", 50051, "service for Smart Lighting operations");
 
         int port = 50051;
         try {
@@ -107,5 +106,6 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }
+
 }
 

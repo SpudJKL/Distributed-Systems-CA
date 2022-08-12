@@ -168,9 +168,9 @@ public class SmartLightingGUI  implements ActionListener {
             //preparing message to send
             lightRequest request = ds.service1.lightRequest.newBuilder().setLightOn(Boolean.parseBoolean(entry1.getText())).setBrightnessInput(Integer.parseInt(entry1.getText())).setColour(Integer.parseInt(entry1.getText())).build();
 
-            lightResponse responseObserver = asyncStub.smartLights(request, responseObserver);
-//
-            reply1.setText(responseObserver.getBrightnessOutput())
+//            lightResponse responseObserver = asyncStub.smartLights(request, responseObserver);
+////
+//            reply1.setText(responseObserver.(Integer.parseInt(getBrightnessOutput()));
 
         }else if (label.equals("Invoke autoLights")) {
             System.out.println("autoLights to be invoked ...");

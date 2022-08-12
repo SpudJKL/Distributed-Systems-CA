@@ -16,7 +16,7 @@ public class Registration {
 
         try {
             // Create a JmDNS instance
-            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost().getHostAddress());
+            JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
             // Register a service
             ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port, service_description);
             jmdns.registerService(serviceInfo);
@@ -24,7 +24,7 @@ public class Registration {
             System.out.printf("Registering service with type %s and name %s \n", service_type, service_name);
 
             // Wait a bit
-            Thread.sleep(1000);
+            Thread.sleep(5000);
 
             // Unregister all services
             //jmdns.unregisterAllServices();

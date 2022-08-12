@@ -81,7 +81,7 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
         System.out.println("-seatManager-");
         String seatStatus = request.getViewSeats();
         seatResponse.Builder response = seatResponse.newBuilder();
-        response.setTotalSeats("See console for output");
+        response.setSeatOutput("See console for output");
 
         Seats.showSeats(seats);
         response.build();

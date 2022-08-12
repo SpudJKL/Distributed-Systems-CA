@@ -41,7 +41,7 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
 
     // Unary
     @Override
-    public void smartTableBooking(TableRequest request, StreamObserver<TableResponse> responseObserver) throws BookingError {
+    public void smartTableBooking(TableRequest request, StreamObserver<TableResponse> responseObserver) {
         System.out.println("-smartTableBooking-");
         // take input and store
         int requestedTable = request.getTableInput();
@@ -74,9 +74,13 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
             }
         }
         //creating booking instance
-        booking booking = new booking(requestedTable, requestedTime);
-        // storing booking object in arrayList
-        booking.arr.add(booking);
+        try {
+            booking booking = new booking(requestedTable, requestedTime);
+            // storing booking object in arrayList
+            booking.arr.add(booking);
+        } catch (BookingError e){
+            System.out.println("yikes");
+        }
         // build response
         response.build();
         responseObserver.onNext(response.build());
@@ -116,6 +120,7 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
     }
 
 
+    // Server streaming
     @Override
     public void smartView(viewRequest request, StreamObserver<viewResponse> responseObserver) {
         System.out.println("-smartView-");

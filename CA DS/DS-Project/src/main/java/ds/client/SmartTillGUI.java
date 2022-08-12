@@ -166,7 +166,7 @@ public class SmartTillGUI  implements ActionListener {
             //retreving reply from service
             ds.service3.seatResponse response = blockingStub.seatManager(request);
 
-            reply2.setText( String.valueOf( response.getTotalSeats()) );
+            reply2.setText( String.valueOf( response.getSeatOutput()) );
 
 
         }
