@@ -4,6 +4,7 @@ import ds.jmDNS.Registration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,10 +16,10 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
     public static void main(String[] args) throws IOException, InterruptedException {
         SmartTillServer smartTillServer = new SmartTillServer();
         Registration reg = new Registration();
-        reg.registerService("_smarttill_http._tcp.local.","SmartTill", 50053, "service for Smart Till operations");
+        reg.registerService("_smarttill_http._tcp.local.", "SmartTill", 50053, "service for Smart Till operations");
         int port = 50053;
         try {
-
+            // Create new Server
             Server server = ServerBuilder.forPort(port)
                     .addService(smartTillServer)
                     .build()
@@ -38,7 +39,9 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
 
     }
 
-    // bi-directional streaming
+    // RPC methods
+
+    // Bi-Directional streaming
     @Override
     public StreamObserver<tillRequest> smartTill(StreamObserver<tillResponse> responseObserver) {
         ArrayList<String> orders = new ArrayList<>();
@@ -62,7 +65,7 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
 
             @Override
             public void onCompleted() {
-
+                // Build response
                 tillResponse response = tillResponse.newBuilder()
                         .setTotalOrdersOutput(String.valueOf(orders.toString()))
                         .build();
@@ -74,15 +77,19 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
 
     // Unary
     @Override
-    public void seatManager(seatRequest request, StreamObserver<seatResponse> responseObserver) {
+    public void seatManager(seatRequest request, StreamObserver<seatResponse> responseObserver){
+        // Get input
         System.out.println("-seatManager-");
         String seatStatus = request.getViewSeats();
-        seatResponse.Builder response = seatResponse.newBuilder();
-        response.setSeatOutput("See console for output");
-
+        // Build response
+        seatResponse response = seatResponse.newBuilder()
+                .setSeatOutput("Look at Server console output please\n")
+                .build();
+        // Call showSeats method and pass in char[][] seats
         Seats.showSeats(seats);
-        response.build();
-        responseObserver.onNext(response.build());
+
+
+        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 }

@@ -1,69 +1,76 @@
 package ds.client;
 
 
-
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
 import ds.jmDNS.Discovery;
 import ds.service2.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
+
 import javax.jmdns.ServiceInfo;
 
 
 public class SmartManagementClient {
 
-        private static SmartManagementGrpc.SmartManagementBlockingStub blockingStub;
-        private static SmartManagementGrpc.SmartManagementStub asyncStub;
+    private static SmartManagementGrpc.SmartManagementBlockingStub blockingStub;
+    private static SmartManagementGrpc.SmartManagementStub asyncStub;
 
-        private ServiceInfo service1Info;
+    private ServiceInfo service1Info;
 
-        public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-            // Discover the jmDNS service
-            Discovery discovery = new Discovery();
-            String service_type = "_smartmanagement_http._tcp.local.";
-            discovery.discoverService(service_type);
+        // Discover the jmDNS service
+        Discovery discovery = new Discovery();
+        String service_type = "_smartmanagement_http._tcp.local.";
+        discovery.discoverService(service_type);
+        // Create channel
+        ManagedChannel channel = ManagedChannelBuilder
+                .forAddress("localhost", 50052)
+                .usePlaintext()
+                .build();
+        // Create stubs
+        blockingStub = SmartManagementGrpc.newBlockingStub(channel);
+        asyncStub = SmartManagementGrpc.newStub(channel);
+        // Sleep for 1 sec for flow of output
+        TimeUnit.SECONDS.sleep(1);
+        // Taking userInput
+        System.out.println("SmartManagement");
+        System.out.println();
+        System.out.println("Please make your choice");
+        System.out.println("1: smartTableBooking()");
+        System.out.println("2: smartQ()");
+        System.out.println("3: smartView()");
+        System.out.println("4: Exit");
+        Scanner sc = new Scanner(System.in);
+        int choice = sc.nextInt();
+        do {
 
-            ManagedChannel channel = ManagedChannelBuilder
-                    .forAddress("localhost", 50052)
-                    .usePlaintext()
-                    .build();
-            // Create stubs
-            blockingStub = SmartManagementGrpc.newBlockingStub(channel);
-            asyncStub = SmartManagementGrpc.newStub(channel);
-            // taking userInput
-            System.out.println("SmartManagement");
-            System.out.println();
-            System.out.println("Please make your choice");
-            System.out.println("1: smartTableBooking()");
-            System.out.println("2: smartQ()");
-            System.out.println("3: smartView()");
-            System.out.println("4: Exit");
-            Scanner sc = new Scanner(System.in);
-            int choice = sc.nextInt();
-            do {
+            switch (choice) {
+                case 1:
+                    smartTableBooking();
+                    break;
+                case 2:
+                    smartQ();
+                    break;
+                case 3:
+                    smartView();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+            }
 
-                switch (choice) {
-                    case 1: smartTableBooking();
-                            break;
-                    case 2: smartQ();
-                            break;
-                    case 3: smartView();
-                            break;
-                    case 4:
-                        System.out.println("Exiting...");
-                            break;
-                }
-
-            } while (choice != 4);
-        }
+        } while (choice != 4);
+    }
 
     // RPC Methods
 
     // Unary
     public static void smartTableBooking() {
-
+        // Prompting user
         Scanner sc = new Scanner(System.in);
         System.out.println("smartTableBooking");
         System.out.println();
@@ -83,20 +90,17 @@ public class SmartManagementClient {
                 .build();
 
         // Send the message via the blocking stub and store the response
-        TableResponse response = blockingStub.smartTableBooking(request);
+        TableResponse response = blockingStub.withDeadlineAfter(15, TimeUnit.SECONDS).smartTableBooking(request);
 
         // Display the result
-        System.out.println("Table: " + response.getTableOutput()+ " Time: " +response.getTimeOutput());
+        System.out.println("Table: " + response.getTableOutput() + " Time: " + response.getTimeOutput());
 
     }
 
     // Client Streaming
     public static void smartQ() {
 
-        // Display a message to show what method has been called
-
         StreamObserver<qResponse> responseObserver = new StreamObserver<qResponse>() {
-
 
             @Override
             public void onNext(qResponse value) {
@@ -111,24 +115,25 @@ public class SmartManagementClient {
 
             @Override
             public void onCompleted() {
-
-                // Client-Streaming is completed
                 System.out.println("smartQ client-streaming has completed!");
             }
         };
 
         // Send the client data here
-        StreamObserver<qRequest> requestObserver = asyncStub.smartQ(responseObserver);
+        StreamObserver<qRequest> requestObserver = asyncStub.withDeadlineAfter(15, TimeUnit.SECONDS).smartQ(responseObserver);
+        // deadline
 
         try {
+            // Prompt user
             Scanner sc = new Scanner(System.in);
             System.out.println("smartQ");
             System.out.println();
             System.out.println("Enter your order details");
             String order = sc.nextLine();
             System.out.println("Enter the desired pickup time");
-            System.out.println("Pleae enter in the format "+1300+" not 13:00");
+            System.out.println("Pleae enter in the format " + 1300 + " not 13:00");
             int requestedTime = sc.nextInt();
+            // Build request
             qRequest request = qRequest.newBuilder()
                     .setQOrder(order)
                     .setTime(requestedTime)
@@ -137,14 +142,13 @@ public class SmartManagementClient {
             requestObserver.onNext(request);
             Thread.sleep(500);
 
-            // The requests have ended
+            // End the requests
             requestObserver.onCompleted();
 
             // Wait for 2 seconds
             Thread.sleep(2000);
 
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -155,20 +159,19 @@ public class SmartManagementClient {
     // Server Streaming
     public static void smartView() {
 
-        // Display a message to show what method has been called
+        // Prompt user
         Scanner sc = new Scanner(System.in);
         System.out.println("smartView");
         System.out.println();
         System.out.println("Please hit enter");
         String userText = sc.nextLine();
 
-
+        // Build request
         viewRequest request = viewRequest.newBuilder()
                 .setBookingsRequest(userText)
                 .build();
 
         StreamObserver<viewResponse> responseObserver = new StreamObserver<viewResponse>() {
-
 
             @Override
             public void onNext(viewResponse value) {
@@ -183,15 +186,13 @@ public class SmartManagementClient {
 
             @Override
             public void onCompleted() {
-
-                // Server-streaming is completed
                 System.out.println("smartView() Server-streaming has completed!");
             }
-
         };
 
         // Client sends the request here via the asynchronous stub
-        asyncStub.smartView(request, responseObserver);
+        asyncStub.withDeadlineAfter(15, TimeUnit.SECONDS).smartView(request, responseObserver);
+        // deadline
 
         try {
             Thread.sleep(15000);

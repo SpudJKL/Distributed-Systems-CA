@@ -9,9 +9,6 @@ import java.net.InetAddress;
 public class Registration {
 
 
-    public Registration() {
-    }
-
     public void registerService(String service_type, String service_name, int service_port, String service_description) {
 
         try {

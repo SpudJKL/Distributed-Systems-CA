@@ -4,8 +4,8 @@ import ds.jmDNS.Registration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
-import java.io.IOException;
 
+import java.io.IOException;
 
 
 public class SmartManagementServer extends SmartManagementGrpc.SmartManagementImplBase {
@@ -14,10 +14,10 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
     public static void main(String[] args) throws InterruptedException, IOException {
         SmartManagementServer service1 = new SmartManagementServer();
         Registration reg = new Registration();
-        reg.registerService("_smartmanagement_http._tcp.local.","SmartManagement", 50052, "service for Smart Management operations");
+        reg.registerService("_smartmanagement_http._tcp.local.", "SmartManagement", 50052, "service for Smart Management operations");
         int port = 50052;
         try {
-
+            // Create new server
             Server server = ServerBuilder.forPort(port)
                     .addService(service1)
                     .build()
@@ -40,14 +40,14 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
     // Unary
     @Override
     public void smartTableBooking(TableRequest request, StreamObserver<TableResponse> responseObserver) {
+        // Get input
         System.out.println("-smartTableBooking-");
-        // take input and store
         int requestedTable = request.getTableInput();
         double requestedTime = request.getTimeInput();
         // pretend fake available booking times and tables
         int[] availableTables = {1, 2, 3, 4, 5, 6, 7, 8, 10, 12};
         double[] availableTimes = {13.00, 14.35, 15.00, 16.00, 17.00, 18.00, 19.00};
-        // create response builder
+        // Build response
         TableResponse.Builder response = TableResponse.newBuilder();
         for (int i = 0; i < availableTables.length; i++) {
             if (requestedTable == availableTables[i]) {
@@ -76,10 +76,10 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
             booking booking = new booking(requestedTable, requestedTime);
             // storing booking object in arrayList
             booking.arr.add(booking);
-        } catch (BookingError e){
+        } catch (BookingError e) {
             System.out.println("yikes");
         }
-        // build response
+
         response.build();
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
@@ -106,7 +106,7 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
 
             @Override
             public void onCompleted() {
-                // Build response message
+                // Build response
                 qResponse response = qResponse.newBuilder()
                         .setQSuccessful("Order has been accepted. See you soon!")
                         .build();
@@ -121,9 +121,12 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
     // Server streaming
     @Override
     public void smartView(viewRequest request, StreamObserver<viewResponse> responseObserver) {
+        // Get input
         System.out.println("-smartView-");
+        // Build response
         viewResponse.Builder response = viewResponse.newBuilder();
         response.setBookingsTotal(String.valueOf(booking.arr.toString()));
+        // call showBookings()
         booking.showBookings();
         response.build();
         responseObserver.onNext(response.build());

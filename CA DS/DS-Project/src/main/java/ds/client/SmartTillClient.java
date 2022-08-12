@@ -9,6 +9,7 @@ import io.grpc.stub.StreamObserver;
 import javax.jmdns.ServiceInfo;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class SmartTillClient {
     private static SmartTillGrpc.SmartTillBlockingStub blockingStub;
@@ -16,7 +17,7 @@ public class SmartTillClient {
 
     private ServiceInfo service1Info;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // Discover the jmDNS service
         Discovery discovery = new Discovery();
@@ -30,12 +31,14 @@ public class SmartTillClient {
         // Create stubs
         blockingStub = SmartTillGrpc.newBlockingStub(channel);
         asyncStub = SmartTillGrpc.newStub(channel);
+        // Sleep for 1 sec for flow of output
+        TimeUnit.SECONDS.sleep(1);
         // taking userInput
         System.out.println("SmartTill");
         System.out.println();
         System.out.println("Please make your choice");
         System.out.println("1: smartTableBooking()");
-        System.out.println("2: smartQ()");
+        System.out.println("2: seatManager()");
         System.out.println("3: Exit");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
@@ -60,7 +63,6 @@ public class SmartTillClient {
     public static void smartTill() {
         StreamObserver<tillResponse> responseObserver = new StreamObserver<tillResponse>() {
 
-
             @Override
             public void onNext(tillResponse value) {
                 System.out.println(value.getTotalOrdersOutput());
@@ -80,8 +82,8 @@ public class SmartTillClient {
         };
 
         // Client sends the requests here via the asynchronous stub
-        StreamObserver<tillRequest> requestObserver = asyncStub.smartTill(responseObserver);
-
+        StreamObserver<tillRequest> requestObserver = asyncStub.withDeadlineAfter(15, TimeUnit.SECONDS).smartTill(responseObserver);
+        // deadline
         try {
             // Taking userInput
             Scanner sc = new Scanner(System.in);
@@ -90,8 +92,7 @@ public class SmartTillClient {
             System.out.println("Enter order details");
             String orderDetails = sc.nextLine();
 
-
-            int col = sc.nextInt();
+            int col = 0;
             do {
                 System.out.println("Enter column");
                 if (sc.hasNext()) {
@@ -103,7 +104,7 @@ public class SmartTillClient {
             } while (!(col >= 1 & col <= 4));
 
 
-            int row = sc.nextInt();
+            int row = 0;
             do {
                 System.out.println("Enter row");
                 if (sc.hasNext()) {
@@ -138,7 +139,7 @@ public class SmartTillClient {
 
 
         try {
-            Thread.sleep(15000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -146,10 +147,10 @@ public class SmartTillClient {
 
     // Unary
     public static void seatManager() {
-
+        // Prompting user
         Scanner sc = new Scanner(System.in);
-        System.out.println("seatManager");
         System.out.println();
+        System.out.println("seatManager");
         System.out.println("Please press enter");
         String userInput = sc.nextLine();
 
@@ -160,10 +161,11 @@ public class SmartTillClient {
                 .build();
 
         // Send the message via the blocking stub and store the response
-        seatResponse response = blockingStub.seatManager(request);
+        seatResponse response = blockingStub.withDeadlineAfter(15, TimeUnit.SECONDS).seatManager(request);
+        // deadline
 
         // Display the result
-        System.out.println("Current seats\n\n" + response.getSeatOutput());
+        System.out.println(response.getSeatOutput());
 
     }
 

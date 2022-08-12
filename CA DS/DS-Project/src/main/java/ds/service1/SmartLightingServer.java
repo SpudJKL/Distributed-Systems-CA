@@ -1,12 +1,14 @@
 package ds.service1;
 
-import ds.jmDNS.Registration;
-import io.grpc.Server;
+import ds.jmDNS.*;
+import io.grpc.*;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
+
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase {
 
@@ -17,7 +19,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
         reg.registerService("_smartlighting_http._tcp.local.","SmartLighting", 50051, "service for Smart Lighting operations");
         int port = 50051;
         try {
-
+            // Create new Server
             Server server = ServerBuilder.forPort(port)
                     .addService(service1)
                     .build()
@@ -33,8 +35,9 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
         }
 
     }
+    // RPC methods
 
-    // bi-directional streaming
+    // Bi-Directional streaming
     @Override
     public StreamObserver<lightRequest> smartLights(StreamObserver<lightResponse> responseObserver) {
         return new StreamObserver<lightRequest>() {
@@ -45,9 +48,9 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
                 int brightness = value.getBrightnessInput();
                 int colour = value.getColour();
 
+                // Build the response
                 lightResponse response = lightResponse.newBuilder().setLightOff(light).setColour(colour).setBrightnessOutput(brightness).build();
 
-                responseObserver.onNext(response);
             }
 
             @Override
@@ -66,30 +69,63 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
     @Override
     public void autoLights(autoLightsRequest request, StreamObserver<autoLightsResponse> responseObserver) {
         System.out.println("-Auto lights-");
+        // Get input
         boolean autoLightsStatus = request.getAutoLightsInput();
+        boolean tempLight = false;
+        String tempDim ="";
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
         int Random = (int)(Math.random()*100);
         LocalDateTime now = LocalDateTime.now();
-        autoLightsResponse.Builder response = autoLightsResponse.newBuilder();
         if (autoLightsStatus) {
-            response.setAutoLightsOutput(true);
+            tempLight = true;
             System.out.println("autoLights on");
-            response.setDimLevels("The time is: " + dtf.format(now) + "." + " The lights has been automatically-dim'd to "+ Random +"% brightness");
-
-        } else {
-            response.setAutoLightsOutput(false);
+            tempDim = ("The time is: " + dtf.format(now) + "." + " The lights has been automatically-dim'd to " + Random + "% brightness");
+        }
+        else {
+            tempLight = false;
             System.out.println("autoLights off");
         }
-        response.build();
-        responseObserver.onNext(response.build());
+        // Build the response
+        autoLightsResponse response = autoLightsResponse.newBuilder()
+                .setAutoLightsOutput(tempLight)
+                .setDimLevels(tempDim)
+                .build();
+
+        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+    // Unary
+//    @Override
+//    public void autoLights(autoLightsRequest request, StreamObserver<autoLightsResponse> responseObserver) {
+//        System.out.println("-Auto lights-");
+//        boolean autoLightsStatus = request.getAutoLightsInput();
+//        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+//        int Random = (int)(Math.random()*100);
+//        LocalDateTime now = LocalDateTime.now();
+//        autoLightsResponse.Builder response = autoLightsResponse.newBuilder();
+//        if (autoLightsStatus) {
+//            response.setAutoLightsOutput(true);
+//            System.out.println("autoLights on");
+//            response.setDimLevels("The time is: " + dtf.format(now) + "." + " The lights has been automatically-dim'd to "+ Random +"% brightness");
+//
+//        } else {
+//            response.setAutoLightsOutput(false);
+//            System.out.println("autoLights off");
+//        }
+//
+//        response.build();
+//        responseObserver.onNext(response.build());
+//        responseObserver.onCompleted();
+//    }
 
     // Server Streaming
     @Override
     public void lightMusic(lightMusicRequest request, StreamObserver<lightMusicResponse> responseObserver) {
         System.out.println("-lightMusic-");
+        // Get input
         boolean lightMusicStatus = request.getLightMusicInput();
+        // Build the response
         lightMusicResponse.Builder response = lightMusicResponse.newBuilder();
         if (lightMusicStatus) {
             response.setLightMusicOutput(true);
