@@ -19,7 +19,6 @@ public class SmartManagementClient {
         private ServiceInfo service1Info;
 
         public static void main(String[] args) {
-            Scanner sc = new Scanner(System.in);
 
             // Discover the jmDNS service
             Discovery discovery = new Discovery();
@@ -30,21 +29,20 @@ public class SmartManagementClient {
                     .forAddress("localhost", 50052)
                     .usePlaintext()
                     .build();
-
-            // Create stubs (generate from proto)
+            // Create stubs
             blockingStub = SmartManagementGrpc.newBlockingStub(channel);
             asyncStub = SmartManagementGrpc.newStub(channel);
-
             // taking userInput
+            System.out.println("SmartManagement");
+            System.out.println();
+            System.out.println("Please make your choice");
+            System.out.println("1: smartTableBooking()");
+            System.out.println("2: smartQ()");
+            System.out.println("3: smartView()");
+            System.out.println("4: Exit");
+            Scanner sc = new Scanner(System.in);
             int choice = sc.nextInt();
             do {
-                System.out.println("SmartManagement");
-                System.out.println();
-                System.out.println("Please make your choice");
-                System.out.println("1: smartTableBooking()");
-                System.out.println("2: smartQ()");
-                System.out.println("3: smartView()");
-                System.out.println("4: Exit");
 
                 switch (choice) {
                     case 1: smartTableBooking();
@@ -61,6 +59,9 @@ public class SmartManagementClient {
             } while (choice != 4);
         }
 
+    // RPC Methods
+
+    // Unary
     public static void smartTableBooking() {
 
         Scanner sc = new Scanner(System.in);
@@ -74,8 +75,6 @@ public class SmartManagementClient {
         System.out.println("13.00, 14.35, 15.00, 16.00, 17.00, 18.00, 19.00");
         System.out.println("Please enter your time choice");
         double requestedTime = sc.nextDouble();
-
-
 
         // Build the request message
         TableRequest request = TableRequest.newBuilder()
@@ -91,6 +90,7 @@ public class SmartManagementClient {
 
     }
 
+    // Client Streaming
     public static void smartQ() {
 
         // Display a message to show what method has been called
@@ -152,6 +152,7 @@ public class SmartManagementClient {
 
     }
 
+    // Server Streaming
     public static void smartView() {
 
         // Display a message to show what method has been called

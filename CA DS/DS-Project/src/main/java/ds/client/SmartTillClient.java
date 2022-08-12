@@ -17,7 +17,6 @@ public class SmartTillClient {
     private ServiceInfo service1Info;
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
         // Discover the jmDNS service
         Discovery discovery = new Discovery();
@@ -28,21 +27,19 @@ public class SmartTillClient {
                 .forAddress("localhost", 50053)
                 .usePlaintext()
                 .build();
-
-        // Create stubs (generate from proto)
+        // Create stubs
         blockingStub = SmartTillGrpc.newBlockingStub(channel);
         asyncStub = SmartTillGrpc.newStub(channel);
-
         // taking userInput
+        System.out.println("SmartTill");
+        System.out.println();
+        System.out.println("Please make your choice");
+        System.out.println("1: smartTableBooking()");
+        System.out.println("2: smartQ()");
+        System.out.println("3: Exit");
+        Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
         do {
-            System.out.println("SmartTill");
-            System.out.println();
-            System.out.println("Please make your choice");
-            System.out.println("1: smartTableBooking()");
-            System.out.println("2: smartQ()");
-            System.out.println("3: Exit");
-
 
             switch (choice) {
                 case 1: smartTill();
@@ -56,6 +53,9 @@ public class SmartTillClient {
 
         } while (choice != 3);
     }
+
+    // RPC Methods
+
     // Bi-Directional
     public static void smartTill() {
         StreamObserver<tillResponse> responseObserver = new StreamObserver<tillResponse>() {
@@ -127,7 +127,7 @@ public class SmartTillClient {
             // End the requests
             requestObserver.onCompleted();
 
-            // Sleep for a bit before sending the next one.
+            // Sleep for a bit
             Thread.sleep(new Random().nextInt(1000) + 500);
 
         } catch (RuntimeException e) {
@@ -145,7 +145,6 @@ public class SmartTillClient {
     }
 
     // Unary
-
     public static void seatManager() {
 
         Scanner sc = new Scanner(System.in);

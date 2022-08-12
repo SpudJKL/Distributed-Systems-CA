@@ -156,7 +156,6 @@ public class SmartLightingClient {
     }
 
     // Unary
-
     public static void autoLights() {
 
         Scanner sc = new Scanner(System.in);
