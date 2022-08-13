@@ -98,6 +98,7 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
                 Order orderObj = new Order(order, time);
                 System.out.println("Order is:" + order + " and the Time requested is: " + time);
                 orderDetails.arr.add(orderObj);
+
             }
 
             @Override
@@ -110,6 +111,7 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
                 qResponse response = qResponse.newBuilder()
                         .setQSuccessful("Order has been accepted. See you soon!")
                         .build();
+
                 responseObserver.onNext(response);
                 responseObserver.onCompleted();
             }

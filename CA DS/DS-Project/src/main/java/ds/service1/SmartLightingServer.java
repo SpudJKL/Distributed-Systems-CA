@@ -137,6 +137,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
         response.build();
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
+
     }
 
 }

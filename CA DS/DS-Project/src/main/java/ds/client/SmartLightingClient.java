@@ -36,14 +36,17 @@ public class SmartLightingClient {
         // Taking userInput
         System.out.println();
         System.out.println("SmartLighting");
-        System.out.println("Please make your choice");
-        System.out.println("1: smartLights()");
-        System.out.println("2: autoLights()");
-        System.out.println("3: lightMusic()");
-        System.out.println("4: Exit");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
+        int choice;
         do {
+            System.out.println();
+            System.out.println("SmartLighting");
+            System.out.println("Please make your choice");
+            System.out.println("1: smartLights()");
+            System.out.println("2: autoLights()");
+            System.out.println("3: lightMusic()");
+            System.out.println("4: Exit");
+            Scanner sc = new Scanner(System.in);
+            choice = sc.nextInt();
 
             switch (choice) {
                 case 1:
@@ -60,6 +63,7 @@ public class SmartLightingClient {
                     break;
             }
         } while (choice != 4);
+        channel.shutdown().awaitTermination(5000, TimeUnit.MILLISECONDS);
     }
 
     // RPC Methods
@@ -93,7 +97,7 @@ public class SmartLightingClient {
             // Prompting user
             Scanner sc = new Scanner(System.in);
             System.out.println();
-            System.out.println("smartLights");
+            System.out.println("--smartLights--");
             System.out.println("Please enter your choices");
             System.out.println("Light on / off");
             System.out.println("True = on");
@@ -141,7 +145,7 @@ public class SmartLightingClient {
             requestObserver.onCompleted();
 
             // Sleep for a bit before sending the next one.
-            Thread.sleep(new Random().nextInt(1000) + 500);
+            Thread.sleep(500);
 
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -162,7 +166,7 @@ public class SmartLightingClient {
         // Prompting user
         Scanner sc = new Scanner(System.in);
         System.out.println();
-        System.out.println("autoLights");
+        System.out.println("--autoLights--");
         System.out.println("Please enter your choices");
         System.out.println("autoLights on / off");
         System.out.println("True = on");
@@ -181,7 +185,7 @@ public class SmartLightingClient {
 
         // Display the result
         System.out.println("autoLights status: " + response.getAutoLightsOutput() + ". " + response.getDimLevels());
-
+        return;
     }
 
     // Server-streaming
@@ -190,7 +194,7 @@ public class SmartLightingClient {
         // Prompting user
         Scanner sc = new Scanner(System.in);
         System.out.println();
-        System.out.println("lightMusic");
+        System.out.println("--lightMusic--");
         System.out.println("Please enter your choices");
         System.out.println("lightMusic on / off");
         System.out.println("True = on");
@@ -231,12 +235,11 @@ public class SmartLightingClient {
         // deadline
 
         try {
-            Thread.sleep(15000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 }
 

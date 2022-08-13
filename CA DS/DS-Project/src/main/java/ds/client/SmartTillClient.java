@@ -34,15 +34,17 @@ public class SmartTillClient {
         // Sleep for 1 sec for flow of output
         TimeUnit.SECONDS.sleep(1);
         // taking userInput
-        System.out.println("SmartTill");
-        System.out.println();
-        System.out.println("Please make your choice");
-        System.out.println("1: smartTableBooking()");
-        System.out.println("2: seatManager()");
-        System.out.println("3: Exit");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
+
+        int choice;
         do {
+            System.out.println("SmartTill");
+            System.out.println();
+            System.out.println("Please make your choice");
+            System.out.println("1: smartTill()");
+            System.out.println("2: seatManager()");
+            System.out.println("3: Exit");
+            Scanner sc = new Scanner(System.in);
+            choice = sc.nextInt();
 
             switch (choice) {
                 case 1: smartTill();
@@ -55,6 +57,7 @@ public class SmartTillClient {
             }
 
         } while (choice != 3);
+        channel.shutdown().awaitTermination(5000, TimeUnit.MILLISECONDS);
     }
 
     // RPC Methods

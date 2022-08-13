@@ -37,16 +37,18 @@ public class SmartManagementClient {
         // Sleep for 1 sec for flow of output
         TimeUnit.SECONDS.sleep(1);
         // Taking userInput
-        System.out.println("SmartManagement");
-        System.out.println();
-        System.out.println("Please make your choice");
-        System.out.println("1: smartTableBooking()");
-        System.out.println("2: smartQ()");
-        System.out.println("3: smartView()");
-        System.out.println("4: Exit");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
+
+        int choice;
         do {
+            System.out.println("SmartManagement");
+            System.out.println();
+            System.out.println("Please make your choice");
+            System.out.println("1: smartTableBooking()");
+            System.out.println("2: smartQ()");
+            System.out.println("3: smartView()");
+            System.out.println("4: Exit");
+            Scanner sc = new Scanner(System.in);
+            choice = sc.nextInt();
 
             switch (choice) {
                 case 1:
@@ -64,6 +66,7 @@ public class SmartManagementClient {
             }
 
         } while (choice != 4);
+        channel.shutdown().awaitTermination(5000, TimeUnit.MILLISECONDS);
     }
 
     // RPC Methods
@@ -140,7 +143,8 @@ public class SmartManagementClient {
                     .build();
 
             requestObserver.onNext(request);
-            Thread.sleep(500);
+
+            Thread.sleep(5000);
 
             // End the requests
             requestObserver.onCompleted();
