@@ -25,7 +25,6 @@ public class SmartTillClient {
         // Generating a valid auth token
         String service_name = "SmartTill";
         String jwt = getJwt(service_name);
-        System.out.println("Token for BloomRPC Testing\n" + jwt);
         BearerToken token = new BearerToken(jwt);
 
         // Discover the jmDNS service
@@ -68,7 +67,7 @@ public class SmartTillClient {
                     break;
                 case 3:
                     System.out.println("Exiting...");
-                    break;
+                    System.exit(1);
             }
 
         } while (choice != 3);

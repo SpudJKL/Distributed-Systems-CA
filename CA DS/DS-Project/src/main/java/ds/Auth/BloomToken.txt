@@ -1,0 +1,4 @@
+Hey Rohit, here is the code to pass to the Metadata for Bloom for Authentication
+{
+    "Authorisation": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTbWFydExpZ2h0aW5nIn0.uRYGikvlZwF-XJnatjL2OjKiusOhqQ4-_uUM25YLK-E"
+}

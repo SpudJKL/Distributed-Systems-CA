@@ -105,7 +105,7 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
                 int time = value.getTime();
                 Order orderDetails = new Order();
                 Order orderObj = new Order(order, time);
-                System.out.println("Order is:" + order + " and the Time requested is: " + time);
+                System.out.println("Order is: " + order + " and the Time requested is: " + time);
                 orderDetails.arr.add(orderObj);
 
             }

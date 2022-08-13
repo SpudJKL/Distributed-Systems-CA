@@ -27,7 +27,6 @@ public class SmartManagementClient {
         // Generating a valid auth token
         String service_name = "SmartManagement";
         String jwt = getJwt(service_name);
-        System.out.println("Token for BloomRPC Testing\n" + jwt);
         BearerToken token = new BearerToken(jwt);
 
         // Discover the jmDNS service
@@ -76,7 +75,7 @@ public class SmartManagementClient {
                     break;
                 case 4:
                     System.out.println("Exiting...");
-                    break;
+                    System.exit(1);
             }
 
         } while (choice != 4);

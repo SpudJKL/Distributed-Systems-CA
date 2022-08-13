@@ -94,7 +94,7 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
         String seatStatus = request.getViewSeats();
         // Build response
         seatResponse response = seatResponse.newBuilder()
-                .setSeatOutput("Look at Server console output please\n")
+                .setSeatOutput("View Server console output please\n")
                 .build();
         // Call showSeats method and pass in char[][] seats
         Seats.showSeats(seats);
