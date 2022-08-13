@@ -1,5 +1,6 @@
 package ds.service2;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 
 public class booking {
@@ -9,16 +10,9 @@ public class booking {
     static ArrayList<booking> arr = new ArrayList<>(); // arrayList for adding new booking objects
 
 
-    public booking(int table, double time) throws BookingError{
-            if (time != 0) {
-                this.table = table;
-                this.time = time;
-                return;
-            }
-        throw new BookingError("Unsupported Booking Information\n" +
-                ". Please correct the Booking Information to be valid");
+    public booking(int table, double time) {
+    }
 
-        }
 
     public booking() {
     }
@@ -35,9 +29,14 @@ public class booking {
         return time;
     }
 
-    public void setTime(double time) {
-        this.time = time;
+    public void setTime(double time) throws BookingError {
+        if (time != 0) {
+            this.time = time;
+            return;
+        }
+        throw new BookingError("Unsupported Booking Information\n Please correct the Booking Information to be valid");
     }
+
 
 
     public static String showBookings(){

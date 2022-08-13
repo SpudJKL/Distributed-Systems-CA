@@ -55,8 +55,9 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
         double[] availableTimes = {13.00, 14.35, 15.00, 16.00, 17.00, 18.00, 19.00};
         // Build response
         TableResponse.Builder response = TableResponse.newBuilder();
-        for (int i = 0; i < availableTables.length; i++) {
-            if (requestedTable == availableTables[i]) {
+
+        for (int i: availableTables){
+            if(i == requestedTable){
                 response.setTableOutput("Table is available");
                 System.out.println("Table booking successful");
                 break;
@@ -65,9 +66,11 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
                 System.out.println("Table booking unsuccessful");
                 break;
             }
+
         }
-        for (int i = 0; i < availableTimes.length; i++) {
-            if (requestedTime == availableTimes[i]) {
+
+        for (double i: availableTimes){
+            if(i == requestedTime){
                 response.setTimeOutput(requestedTime);
                 System.out.println("Time is available");
                 break;
@@ -76,15 +79,13 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
                 System.out.println("Time is unavailable");
                 break;
             }
+
         }
+
         //creating booking instance
-        try {
-            booking booking = new booking(requestedTable, requestedTime);
-            // storing booking object in arrayList
-            booking.arr.add(booking);
-        } catch (BookingError e) {
-            System.out.println("yikes");
-        }
+        booking booking = new booking(requestedTable, requestedTime);
+        // storing booking object in arrayList
+        booking.arr.add(booking);
 
         response.build();
         responseObserver.onNext(response.build());
