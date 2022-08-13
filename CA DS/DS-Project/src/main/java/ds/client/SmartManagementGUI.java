@@ -1,21 +1,24 @@
 package ds.client;
+
 import ds.jmDNS.Discovery;
 import ds.service2.SmartManagementGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SmartManagementGUI  implements ActionListener {
+// All the GUI files in ds.client are attempts and not fully functional Rohit :)
+
+public class SmartManagementGUI implements ActionListener {
 
 
     private JTextField entry1, reply1;
     private JTextField entry2, reply2;
     private JTextField entry3, reply3;
-
 
 
     private JPanel getService1JPanel() {
@@ -24,10 +27,10 @@ public class SmartManagementGUI  implements ActionListener {
 
         BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
-        JLabel label = new JLabel("Enter value")	;
+        JLabel label = new JLabel("Enter value");
         panel.add(label);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
-        entry1 = new JTextField("",10);
+        entry1 = new JTextField("", 10);
         panel.add(entry1);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -37,8 +40,8 @@ public class SmartManagementGUI  implements ActionListener {
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
         reply1 = new JTextField("", 10);
-        reply1 .setEditable(false);
-        panel.add(reply1 );
+        reply1.setEditable(false);
+        panel.add(reply1);
 
         panel.setLayout(boxlayout);
 
@@ -52,10 +55,10 @@ public class SmartManagementGUI  implements ActionListener {
 
         BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
-        JLabel label = new JLabel("Enter value")	;
+        JLabel label = new JLabel("Enter value");
         panel.add(label);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
-        entry2 = new JTextField("",10);
+        entry2 = new JTextField("", 10);
         panel.add(entry2);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -65,8 +68,8 @@ public class SmartManagementGUI  implements ActionListener {
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
         reply2 = new JTextField("", 10);
-        reply2 .setEditable(false);
-        panel.add(reply2 );
+        reply2.setEditable(false);
+        panel.add(reply2);
 
         panel.setLayout(boxlayout);
 
@@ -80,10 +83,10 @@ public class SmartManagementGUI  implements ActionListener {
 
         BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
-        JLabel label = new JLabel("Enter value")	;
+        JLabel label = new JLabel("Enter value");
         panel.add(label);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
-        entry3 = new JTextField("",10);
+        entry3 = new JTextField("", 10);
         panel.add(entry3);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -93,8 +96,8 @@ public class SmartManagementGUI  implements ActionListener {
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
         reply3 = new JTextField("", 10);
-        reply3 .setEditable(false);
-        panel.add(reply3 );
+        reply3.setEditable(false);
+        panel.add(reply3);
 
         panel.setLayout(boxlayout);
 
@@ -134,9 +137,9 @@ public class SmartManagementGUI  implements ActionListener {
         // Set border for the panel
         panel.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
 
-        panel.add( getService1JPanel() );
-        panel.add( getService2JPanel() );
-        panel.add( getService3JPanel() );
+        panel.add(getService1JPanel());
+        panel.add(getService2JPanel());
+        panel.add(getService3JPanel());
 
 
         // Set size for the frame
@@ -151,7 +154,7 @@ public class SmartManagementGUI  implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton)e.getSource();
+        JButton button = (JButton) e.getSource();
         String label = button.getActionCommand();
 
         if (label.equals("Invoke smartTableBooking")) {
@@ -170,9 +173,9 @@ public class SmartManagementGUI  implements ActionListener {
             //retrieving reply from service
             ds.service2.TableResponse response = blockingStub.smartTableBooking(request);
 
-            reply1.setText( String.valueOf( response.getTableOutput()));
+            reply1.setText(String.valueOf(response.getTableOutput()));
 
-        }else if (label.equals("Invoke smartQ")) {
+        } else if (label.equals("Invoke smartQ")) {
             System.out.println("smartQ to be invoked ...");
 
 
@@ -192,7 +195,7 @@ public class SmartManagementGUI  implements ActionListener {
 //
 //            reply2.setText( String.valueOf( response.getQSuccessful()) );
 
-        }else if (label.equals("Invoke smartView")) {
+        } else if (label.equals("Invoke smartView")) {
             System.out.println("smartView to be invoked ...");
 
 
@@ -210,7 +213,7 @@ public class SmartManagementGUI  implements ActionListener {
 //
 //            reply3.setText( String.valueOf( response.getOrdersTime()));
 
-        }else{
+        } else {
 
         }
 

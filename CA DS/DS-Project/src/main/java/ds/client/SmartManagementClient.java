@@ -4,6 +4,7 @@ package ds.client;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import ds.Auth.BearerToken;
 import ds.jmDNS.Discovery;
 import ds.service2.*;
 import io.grpc.ManagedChannel;
@@ -11,6 +12,8 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
 import javax.jmdns.ServiceInfo;
+
+import static ds.Auth.jwt.getJwt;
 
 
 public class SmartManagementClient {
@@ -21,19 +24,30 @@ public class SmartManagementClient {
     private ServiceInfo service1Info;
 
     public static void main(String[] args) throws InterruptedException {
+        // Generating a valid auth token
+        String service_name = "SmartManagement";
+        String jwt = getJwt(service_name);
+        System.out.println("Token for BloomRPC Testing\n" + jwt);
+        BearerToken token = new BearerToken(jwt);
 
         // Discover the jmDNS service
         Discovery discovery = new Discovery();
         String service_type = "_smartmanagement_http._tcp.local.";
         discovery.discoverService(service_type);
+
         // Create channel
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost", 50052)
                 .usePlaintext()
                 .build();
+
         // Create stubs
-        blockingStub = SmartManagementGrpc.newBlockingStub(channel);
-        asyncStub = SmartManagementGrpc.newStub(channel);
+        blockingStub = SmartManagementGrpc.newBlockingStub(channel)
+                .withCallCredentials(token);
+
+        asyncStub = SmartManagementGrpc.newStub(channel)
+                .withCallCredentials(token);
+
         // Sleep for 1 sec for flow of output
         TimeUnit.SECONDS.sleep(1);
         // Taking userInput
@@ -75,7 +89,7 @@ public class SmartManagementClient {
     public static void smartTableBooking() {
         // Prompting user
         Scanner sc = new Scanner(System.in);
-        System.out.println("smartTableBooking");
+        System.out.println("--smartTableBooking--");
         System.out.println();
         System.out.println("Available tables");
         System.out.println("1, 2, 3, 4, 5, 6, 7, 8, 10, 12");
@@ -129,8 +143,7 @@ public class SmartManagementClient {
         try {
             // Prompt user
             Scanner sc = new Scanner(System.in);
-            System.out.println("smartQ");
-            System.out.println();
+            System.out.println("--smartQ--");
             System.out.println("Enter your order details");
             String order = sc.nextLine();
             System.out.println("Enter the desired pickup time");
@@ -165,8 +178,8 @@ public class SmartManagementClient {
 
         // Prompt user
         Scanner sc = new Scanner(System.in);
-        System.out.println("smartView");
-        System.out.println();
+        System.out.println("--smartView--");
+
         System.out.println("Please hit enter");
         String userText = sc.nextLine();
 

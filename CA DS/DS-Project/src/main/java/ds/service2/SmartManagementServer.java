@@ -1,5 +1,7 @@
 package ds.service2;
 
+import ds.Auth.AuthorisationServerInterceptor;
+import ds.Auth.Constants;
 import ds.jmDNS.Registration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -20,6 +22,7 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
             // Create new server
             Server server = ServerBuilder.forPort(port)
                     .addService(service1)
+                    .intercept(new AuthorisationServerInterceptor())
                     .build()
                     .start();
 
@@ -40,6 +43,9 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
     // Unary
     @Override
     public void smartTableBooking(TableRequest request, StreamObserver<TableResponse> responseObserver) {
+
+        String clientId = Constants.CLIENT_ID_CONTEXT_KEY.get();
+        System.out.println("Processing request from " + clientId);
         // Get input
         System.out.println("-smartTableBooking-");
         int requestedTable = request.getTableInput();
@@ -92,6 +98,9 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
 
             @Override
             public void onNext(qRequest value) {
+                String clientId = Constants.CLIENT_ID_CONTEXT_KEY.get();
+                System.out.println("Processing request from " + clientId);
+
                 String order = value.getQOrder();
                 int time = value.getTime();
                 Order orderDetails = new Order();
@@ -123,11 +132,16 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
     // Server streaming
     @Override
     public void smartView(viewRequest request, StreamObserver<viewResponse> responseObserver) {
-        // Get input
+
+        String clientId = Constants.CLIENT_ID_CONTEXT_KEY.get();
+        System.out.println("Processing request from " + clientId);
+
         System.out.println("-smartView-");
+
         // Build response
         viewResponse.Builder response = viewResponse.newBuilder();
         response.setBookingsTotal(String.valueOf(booking.arr.toString()));
+
         // call showBookings()
         booking.showBookings();
         response.build();

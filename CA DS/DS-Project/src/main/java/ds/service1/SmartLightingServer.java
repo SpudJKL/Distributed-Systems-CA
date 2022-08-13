@@ -1,5 +1,7 @@
 package ds.service1;
 
+import ds.Auth.AuthorisationServerInterceptor;
+import ds.Auth.Constants;
 import ds.jmDNS.*;
 import io.grpc.*;
 import io.grpc.ServerBuilder;
@@ -22,6 +24,7 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
             // Create new Server
             Server server = ServerBuilder.forPort(port)
                     .addService(service1)
+                    .intercept(new AuthorisationServerInterceptor())
                     .build()
                     .start();
 
@@ -43,6 +46,9 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
         return new StreamObserver<lightRequest>() {
             @Override
             public void onNext(lightRequest value) {
+                // auth
+                String clientId = Constants.CLIENT_ID_CONTEXT_KEY.get();
+                System.out.println("Processing request from " + clientId);
                 // parse data from info
                 boolean light = value.getLightOn();
                 int brightness = value.getBrightnessInput();
@@ -69,6 +75,9 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
     @Override
     public void autoLights(autoLightsRequest request, StreamObserver<autoLightsResponse> responseObserver) {
         System.out.println("-Auto lights-");
+        // auth
+        String clientId = Constants.CLIENT_ID_CONTEXT_KEY.get();
+        System.out.println("Processing request from " + clientId);
         // Get input
         boolean autoLightsStatus = request.getAutoLightsInput();
         boolean tempLight = false;
@@ -123,6 +132,9 @@ public class SmartLightingServer extends SmartLightingGrpc.SmartLightingImplBase
     @Override
     public void lightMusic(lightMusicRequest request, StreamObserver<lightMusicResponse> responseObserver) {
         System.out.println("-lightMusic-");
+        // auth
+        String clientId = Constants.CLIENT_ID_CONTEXT_KEY.get();
+        System.out.println("Processing request from " + clientId);
         // Get input
         boolean lightMusicStatus = request.getLightMusicInput();
         // Build the response

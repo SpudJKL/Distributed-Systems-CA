@@ -1,5 +1,6 @@
 package ds.client;
 
+import ds.Auth.BearerToken;
 import ds.jmDNS.Discovery;
 
 import ds.service3.*;
@@ -11,6 +12,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import static ds.Auth.jwt.getJwt;
+
 public class SmartTillClient {
     private static SmartTillGrpc.SmartTillBlockingStub blockingStub;
     private static SmartTillGrpc.SmartTillStub asyncStub;
@@ -19,18 +22,30 @@ public class SmartTillClient {
 
     public static void main(String[] args) throws InterruptedException {
 
+        // Generating a valid auth token
+        String service_name = "SmartTill";
+        String jwt = getJwt(service_name);
+        System.out.println("Token for BloomRPC Testing\n" + jwt);
+        BearerToken token = new BearerToken(jwt);
+
         // Discover the jmDNS service
         Discovery discovery = new Discovery();
         String service_type = "_smarttill_http._tcp.local.";
         discovery.discoverService(service_type);
 
+        // Create channel
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost", 50053)
                 .usePlaintext()
                 .build();
+
         // Create stubs
-        blockingStub = SmartTillGrpc.newBlockingStub(channel);
-        asyncStub = SmartTillGrpc.newStub(channel);
+        blockingStub = SmartTillGrpc.newBlockingStub(channel)
+                .withCallCredentials(token);
+
+        asyncStub = SmartTillGrpc.newStub(channel)
+                .withCallCredentials(token);
+
         // Sleep for 1 sec for flow of output
         TimeUnit.SECONDS.sleep(1);
         // taking userInput
@@ -90,9 +105,8 @@ public class SmartTillClient {
         try {
             // Taking userInput
             Scanner sc = new Scanner(System.in);
-            System.out.println("smartTill");
-            System.out.println();
-            System.out.println("Enter order details");
+            System.out.println("--smartTill--");
+            System.out.println("Enter order details e.g Chicken curry etc");
             String orderDetails = sc.nextLine();
 
             int col = 0;

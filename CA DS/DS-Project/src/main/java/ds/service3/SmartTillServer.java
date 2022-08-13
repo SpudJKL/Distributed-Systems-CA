@@ -1,5 +1,7 @@
 package ds.service3;
 
+import ds.Auth.AuthorisationServerInterceptor;
+import ds.Auth.Constants;
 import ds.jmDNS.Registration;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -22,6 +24,7 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
             // Create new Server
             Server server = ServerBuilder.forPort(port)
                     .addService(smartTillServer)
+                    .intercept(new AuthorisationServerInterceptor())
                     .build()
                     .start();
 
@@ -48,6 +51,10 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
         return new StreamObserver<tillRequest>() {
             @Override
             public void onNext(tillRequest value) {
+
+                String clientId = Constants.CLIENT_ID_CONTEXT_KEY.get();
+                System.out.println("Processing request from " + clientId);
+
                 // store information from client
 
                 String orderInfo = value.getOrderInput();
@@ -78,6 +85,10 @@ public class SmartTillServer extends SmartTillGrpc.SmartTillImplBase {
     // Unary
     @Override
     public void seatManager(seatRequest request, StreamObserver<seatResponse> responseObserver){
+
+        String clientId = Constants.CLIENT_ID_CONTEXT_KEY.get();
+        System.out.println("Processing request from " + clientId);
+
         // Get input
         System.out.println("-seatManager-");
         String seatStatus = request.getViewSeats();

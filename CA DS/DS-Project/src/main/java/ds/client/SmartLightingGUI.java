@@ -1,27 +1,24 @@
 package ds.client;
 
 import ds.jmDNS.Discovery;
-import ds.jmDNS.Registration;
-import ds.service1.SmartLightingGrpc;
 import ds.service1.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Properties;
 
+// All the GUI files in ds.client are attempts and not fully functional Rohit :)
 
-
-public class SmartLightingGUI  implements ActionListener {
+public class SmartLightingGUI implements ActionListener {
 
 
     private JTextField entry1, reply1;
     private JTextField entry2, reply2;
     private JTextField entry3, reply3;
-
 
 
     private JPanel getService1JPanel() {
@@ -30,10 +27,10 @@ public class SmartLightingGUI  implements ActionListener {
 
         BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
-        JLabel label = new JLabel("Enter value")	;
+        JLabel label = new JLabel("Enter value");
         panel.add(label);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
-        entry1 = new JTextField("",10);
+        entry1 = new JTextField("", 10);
         panel.add(entry1);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -43,8 +40,8 @@ public class SmartLightingGUI  implements ActionListener {
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
         reply1 = new JTextField("", 10);
-        reply1 .setEditable(false);
-        panel.add(reply1 );
+        reply1.setEditable(false);
+        panel.add(reply1);
 
         panel.setLayout(boxlayout);
 
@@ -58,10 +55,10 @@ public class SmartLightingGUI  implements ActionListener {
 
         BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
-        JLabel label = new JLabel("Enter true or false")	;
+        JLabel label = new JLabel("Enter true or false");
         panel.add(label);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
-        entry2 = new JTextField("",10);
+        entry2 = new JTextField("", 10);
         panel.add(entry2);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -71,8 +68,8 @@ public class SmartLightingGUI  implements ActionListener {
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
         reply2 = new JTextField("", 10);
-        reply2 .setEditable(false);
-        panel.add(reply2 );
+        reply2.setEditable(false);
+        panel.add(reply2);
 
         panel.setLayout(boxlayout);
 
@@ -86,10 +83,10 @@ public class SmartLightingGUI  implements ActionListener {
 
         BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
-        JLabel label = new JLabel("Enter true or false")	;
+        JLabel label = new JLabel("Enter true or false");
         panel.add(label);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
-        entry3 = new JTextField("",10);
+        entry3 = new JTextField("", 10);
         panel.add(entry3);
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -99,8 +96,8 @@ public class SmartLightingGUI  implements ActionListener {
         panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
         reply3 = new JTextField("", 10);
-        reply3 .setEditable(false);
-        panel.add(reply3 );
+        reply3.setEditable(false);
+        panel.add(reply3);
 
         panel.setLayout(boxlayout);
 
@@ -138,9 +135,9 @@ public class SmartLightingGUI  implements ActionListener {
         // Set border for the panel
         panel.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
 
-        panel.add( getService1JPanel() );
-        panel.add( getService2JPanel() );
-        panel.add( getService3JPanel() );
+        panel.add(getService1JPanel());
+        panel.add(getService2JPanel());
+        panel.add(getService3JPanel());
 
 
         // Set size for the frame
@@ -155,7 +152,7 @@ public class SmartLightingGUI  implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton)e.getSource();
+        JButton button = (JButton) e.getSource();
         String label = button.getActionCommand();
 
         if (label.equals("Invoke smartLights")) {
@@ -172,7 +169,7 @@ public class SmartLightingGUI  implements ActionListener {
 ////
 //            reply1.setText(responseObserver.(Integer.parseInt(getBrightnessOutput()));
 
-        }else if (label.equals("Invoke autoLights")) {
+        } else if (label.equals("Invoke autoLights")) {
             System.out.println("autoLights to be invoked ...");
 
 
@@ -189,10 +186,10 @@ public class SmartLightingGUI  implements ActionListener {
             //retreving reply from service
             autoLightsResponse response = blockingStub.autoLights(request);
 
-            reply2.setText( String.valueOf(response.getAutoLightsOutput()) );
+            reply2.setText(String.valueOf(response.getAutoLightsOutput()));
             channel.shutdown();
 
-        }else if (label.equals("Invoke lightMusic")) {
+        } else if (label.equals("Invoke lightMusic")) {
             System.out.println("lightMusic to be invoked ...");
 
 
@@ -210,7 +207,6 @@ public class SmartLightingGUI  implements ActionListener {
 //
 //
 //            reply3.setText( String.valueOf( response.getLightMusicOutput()) );
-
 
 
         }

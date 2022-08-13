@@ -1,8 +1,7 @@
 package ds.client;
 
 import ds.service1.*;
-
-import java.util.Random;
+import ds.Auth.*;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +9,8 @@ import ds.jmDNS.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
+
+import static ds.Auth.jwt.getJwt;
 
 
 public class SmartLightingClient {
@@ -19,18 +20,30 @@ public class SmartLightingClient {
 
     public static void main(String[] args) throws InterruptedException {
 
+        // Generating a valid auth token
+        String service_name = "SmartLighting";
+        String jwt = getJwt(service_name);
+        System.out.println("Token for BloomRPC Testing\n" + jwt);
+        BearerToken token = new BearerToken(jwt);
+
         // Discover the jmDNS service
         Discovery discovery = new Discovery();
         String service_type = "_smartlighting_http._tcp.local.";
         discovery.discoverService(service_type);
+
         // Create channel
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost", 50051)
                 .usePlaintext()
                 .build();
+
         // Create stubs
-        blockingStub = SmartLightingGrpc.newBlockingStub(channel);
-        asyncStub = SmartLightingGrpc.newStub(channel);
+        blockingStub = SmartLightingGrpc.newBlockingStub(channel)
+                .withCallCredentials(token);
+
+        asyncStub = SmartLightingGrpc.newStub(channel)
+                .withCallCredentials(token);
+
         // Sleep for 1 sec for flow of output
         TimeUnit.SECONDS.sleep(1);
         // Taking userInput
