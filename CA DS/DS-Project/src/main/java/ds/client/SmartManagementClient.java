@@ -109,7 +109,7 @@ public class SmartManagementClient {
         TableResponse response = blockingStub.withDeadlineAfter(15, TimeUnit.SECONDS).smartTableBooking(request);
 
         // Display the result
-        System.out.println("Table: " + response.getTableOutput() + " Time: " + response.getTimeOutput());
+        System.out.println("Booking successful for Table: " + response.getTableOutput() + " Time: " + response.getTimeOutput());
 
     }
 

@@ -86,6 +86,7 @@ public class SmartManagementServer extends SmartManagementGrpc.SmartManagementIm
         booking booking = new booking(requestedTable, requestedTime);
         // storing booking object in arrayList
         booking.arr.add(booking);
+        System.out.println("Booking made for Table: "+ requestedTable + "and Time: " + requestedTime);
 
         response.build();
         responseObserver.onNext(response.build());
